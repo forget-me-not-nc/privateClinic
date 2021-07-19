@@ -1,8 +1,10 @@
 package com.example.privateclinic.controllers.rest;
 
+import com.example.privateclinic.security.CustomUserDetails;
 import com.example.privateclinic.service.doctors.impls.DoctorServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,9 +25,8 @@ public class DoctorRestController
 	@Autowired
 	DoctorServiceImpl doctorService;
 
-	@PreAuthorize(value = "hasRole('ROLE_ADMIN') or hasRole('ROLE_PATIENT')")
 	@RequestMapping("/showAll")
-	public String showAllDoctors(Model model)
+	public String showAllDoctors(Model model, @AuthenticationPrincipal CustomUserDetails userDetails)
 	{
 		model.addAttribute("doctors", doctorService.getAll());
 

@@ -2,6 +2,7 @@ package com.example.privateclinic.controllers.rest;
 
 import com.example.privateclinic.models.*;
 import com.example.privateclinic.security.CustomUserDetails;
+import com.example.privateclinic.service.doctors.impls.DoctorServiceImpl;
 import com.example.privateclinic.service.patients.impls.PatientServiceImpl;
 import com.example.privateclinic.service.users.impls.UserServiceImpl;
 import org.bson.types.ObjectId;
@@ -19,8 +20,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.server.ResponseStatusException;
 
+import javax.annotation.PostConstruct;
 import java.text.SimpleDateFormat;
+import java.time.LocalTime;
+import java.util.Arrays;
 import java.util.Collections;
+import java.util.Date;
 import java.util.Optional;
 
 /**
@@ -37,6 +42,9 @@ public class CommonController
 {
 	@Autowired
 	PatientServiceImpl patientService;
+
+	@Autowired
+	DoctorServiceImpl doctorService;
 
 	@Autowired
 	UserServiceImpl userService;
@@ -105,7 +113,7 @@ public class CommonController
 	{
 		if (userDetails.getAuthorities().contains(new SimpleGrantedAuthority(Roles.ROLE_ADMIN.toString())))
 		{
-			return "mainPages/admin/mainPage/adminMainPage";
+			model.addAttribute("user", null);
 		}
 		else if (userDetails.getAuthorities().contains(new SimpleGrantedAuthority(Roles.ROLE_PATIENT.toString())))
 		{
@@ -117,15 +125,33 @@ public class CommonController
 
 				if(patient.isPresent())
 				{
-					model.addAttribute("patient", patient.get());
+					model.addAttribute("user", patient.get().getPerson());
 				}
 				else throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR);
 			}
 			else throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR);
 
-			return "mainPages/patients/mainPage/patientMainPage";
+		}
+		else if(userDetails.getAuthorities().contains(new SimpleGrantedAuthority(Roles.ROLE_DOCTOR.toString())))
+		{
+			Optional<User> user = userService.findUserByUsername(userDetails.getUsername());
 
-		} else throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+			if (user.isPresent())
+			{
+				Optional<Doctor> doctor = doctorService.findByUser(user.get());
+
+				if(doctor.isPresent())
+				{
+					model.addAttribute("user", doctor.get().getPerson());
+					model.addAttribute("doctorInfo", doctor.get());
+				}
+				else throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR);
+			}
+			else throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		else throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+
+		return "main-page";
 	}
 
 }

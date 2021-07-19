@@ -4,6 +4,7 @@ import com.example.privateclinic.models.Doctor;
 import com.example.privateclinic.models.User;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Created by IntelliJ IDEA.
@@ -16,6 +17,8 @@ import java.util.List;
 
 public interface IDoctorService
 {
+	Optional<Doctor> findByUser(User user);
+
 	List<Doctor> getAll();
 
 	Doctor getById(String id);

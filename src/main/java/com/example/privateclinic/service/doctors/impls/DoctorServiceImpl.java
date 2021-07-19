@@ -1,12 +1,14 @@
 package com.example.privateclinic.service.doctors.impls;
 
 import com.example.privateclinic.models.Doctor;
+import com.example.privateclinic.models.User;
 import com.example.privateclinic.repository.DoctorRepository;
 import com.example.privateclinic.service.doctors.interfaces.IDoctorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Created by IntelliJ IDEA.
@@ -22,6 +24,12 @@ public class DoctorServiceImpl implements IDoctorService
 {
 	@Autowired
 	DoctorRepository doctorRepository;
+
+	@Override
+	public Optional<Doctor> findByUser(User user)
+	{
+		return doctorRepository.findByUser(user);
+	}
 
 	@Override
 	public List<Doctor> getAll()

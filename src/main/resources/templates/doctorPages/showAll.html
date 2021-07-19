@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="eng" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
+    <title>Site page</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
@@ -27,17 +28,20 @@
 <nav class="py-2 bg-dark border-bottom">
     <div class="container d-flex flex-wrap">
         <ul class="nav me-auto">
-            <li class="nav-item"><a href="/main" class="nav-link link-light px-2">Home</a></li>
-            <li sec:authorize="hasRole('ROLE_ADMIN')" class="nav-item"><a href="/patient/showAll" class="nav-link link-light px-2">Patients</a></li>
-            <li class="nav-item"><a href="/doctor/showAll" class="nav-link link-light px-2 active">Doctors
-                <span class="sr-only">(current)</span></a></li>
-            <li class="nav-item"><a href="/applications/showAll" class="nav-link link-light px-2">Applications</a></li>
+            <li class="nav-item"><a href="/main" class="nav-link link-light px-2" aria-current="page">Home</a></li>
+            <li class="nav-item"><a href="/doctor/showAll" class="nav-link link-light px-2 active" aria-current="page">Doctors
+                <span class="sr-only">(current)</span></a>
+            </li>
+            <li sec:authorize="hasRole('ROLE_ADMIN')" class="nav-item">
+                <a href="/patient/showAll" class="nav-link link-light px-2" aria-current="page">Patients</span></a>
+            </li>
         </ul>
         <ul class="nav">
             <li class="nav-item"><a href="/logout" class="nav-link link-light px-2">Logout</a></li>
         </ul>
     </div>
 </nav>
+<!-- table -->
 <table class="table" style="width: max-content; margin: 40px auto; background-color: white">
     <caption>List</caption>
     <thead class="table-dark">
@@ -65,8 +69,8 @@
         <td th:text="${dc.getPerson().getEMail()}"></td>
         <td th:text="${dc.getPerson().getSex().toString()}"></td>
         <td th:text="${dc.getSpecialty()}"></td>
-        <td th:text="${dc.getStartHour().getHour()}\':\'${dc.getStartHour().getMinute()}-${dc.getEndHour().getHour()}\':\'${dc.getEndHour().getMinute()}"></td>
-        <td th:text="${dc.getUser().getUsername()}"></td>
+        <td th:text="${#temporals.format(dc.getStartHour(), 'HH:mm')} + '-' + ${#temporals.format(dc.getEndHour(), 'HH:mm')}"></td>
+        <td sec:authorize="hasRole('ROLE_ADMIN')" th:text="${dc.getUser().getUsername()}"></td>
         <td sec:authorize="hasRole('ROLE_ADMIN')">
             <a href="#" style="text-decoration: none">
                 <button type="button" class="btn btn-outline-secondary">

@@ -13,6 +13,8 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import javax.annotation.PostConstruct;
+
 /**
  * Created by IntelliJ IDEA.
  * privateClinic.SecurityConfiguration
@@ -61,4 +63,5 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter
 	{
 		auth.userDetailsService(userDetailsService).passwordEncoder(encoder());
 	}
+
 }
