@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>500</title>
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:700,900" rel="stylesheet">
+  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+  <script type="text/javascript" src="/js/error500.js" defer></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css?family=Lato|Roboto+Slab');
+
+    * {
+      position: relative;
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    .centered {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    h1 {
+      margin-bottom: 50px;
+      font-family: 'Lato', sans-serif;
+      font-size: 50px;
+    }
+
+    .message {
+      display: inline-block;
+      line-height: 1.2;
+      transition: line-height .2s, width .2s;
+      overflow: hidden;
+    }
+
+    .message,
+    .hidden {
+      font-family: 'Roboto Slab', serif;
+      font-size: 18px;
+    }
+
+    .hidden {
+      color: rgba(197, 208, 159, 0.09);
+    }
+
+    .back-button {
+      color: white;
+      outline: none;
+      box-shadow: none;
+      background: #656568;
+      height: 50px;
+      width: 120px;
+      font-family: 'Roboto Slab', serif;
+      font-size: 17px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      border-radius: 5px;
+      transition: box-shadow .4s;
+    }
+
+    .back-button:hover {
+      box-shadow: 0 0 16px #656568;
+    }
+  </style>
+</head>
+<body style="background-color: rgba(197,208,159,0.09);">
+<section class="centered">
+  <h1>500 Server Error</h1>
+  <div class="container">
+    <span class="message" id="js-whoops"></span> <span class="message" id="js-appears"></span> <span class="message"
+                                                                                                     id="js-error"></span>
+    <span class="message" id="js-apology"></span>
+    <div><span class="hidden" id="js-hidden">Message Here</span></div>
+  </div>
+  <a href="/main">
+    <button type="button" class="back-button">Title</button>
+  </a>
+</section>
+<script defer>
+
+  const messages = [
+    ['Whoops.', 'Oops.', 'Excuse me.', 'Oh Dear.', 'Well poo.', 'Hm...', 'This is awkward.', 'Well gosh!'],
+    ['It appears', 'Looks like', 'Unfortunately,', 'It just so happens', 'Sadly,', 'Seemingly from nowhere'],
+    ['there was an error.', 'we goofed up.', 'a bad thing happend.', 'the server crashed.', 'a bug appeared.', 'someone did a naughty.', 'pixies got into the server!', 'the server threw a tantrum.', 'the website had a bad day.', 'our code pooped out.'],
+    ['Sorry.', 'Apologies.', 'Our bad.', 'Sad day.', 'We are quite contrite.', 'Beg pardon.']
+  ];
+
+
+  const messageElements = [
+    document.querySelector('#js-whoops'),
+    document.querySelector('#js-appears'),
+    document.querySelector('#js-error'),
+    document.querySelector('#js-apology')
+  ];
+
+
+  const widthElement = document.querySelector('#js-hidden');
+
+  let lastMessageType = -1;
+
+  let messageTimer = 4000;
+
+
+  document.addEventListener('DOMContentLoaded', (event) => {
+    setupMessages();
+    setInterval(() => {
+      swapMessage();
+    }, messageTimer);
+  });
+
+
+  function setupMessages() {
+    messageElements.forEach((element, index) => {
+      let newMessage = getNewMessage(index);
+      element.innerText = newMessage;
+    });
+  }
+
+
+  function calculateWidth(element, message) {
+
+    widthElement.innerText = message;
+    let newWidth = widthElement.getBoundingClientRect().width;
+    element.style.width = `${newWidth}px`;
+  }
+
+
+  function swapMessage() {
+    let toSwapIndex = getNewSwapIndex();
+    let newMessage = getNewMessage(toSwapIndex);
+
+    messageElements[toSwapIndex].style.lineHeight = '0';
+
+    setTimeout(() => {
+
+      checkWidthSet(toSwapIndex, messageElements[toSwapIndex].innerText);
+
+      messageElements[toSwapIndex].innerText = newMessage;
+
+      calculateWidth(messageElements[toSwapIndex], newMessage);
+    }, 200);
+
+    setTimeout(() => {
+      messageElements[toSwapIndex].style.lineHeight = '1.2';
+    }, 400);
+  }
+
+
+  function checkWidthSet(index, message) {
+    if (false === messageElements[index].style.width) {
+      messageElements[index].style.width = `${messageElements[index].clientWidth}px`;
+    }
+  }
+
+
+  function getNewSwapIndex() {
+    let newMessageIndex = Math.floor(Math.random() * messages.length);
+    while (lastMessageType === newMessageIndex) {
+      newMessageIndex = Math.floor(Math.random() * messages.length);
+    }
+    return newMessageIndex;
+  }
+
+
+  function getNewMessage(toSwapIndex) {
+    const messagesArray = messages[toSwapIndex];
+    const previousMessage = messageElements[toSwapIndex].innerText;
+
+    let newMessageIndex = Math.floor(Math.random() * messagesArray.length);
+    let newMessage = messagesArray[newMessageIndex];
+
+    while (newMessage === previousMessage) {
+      newMessageIndex = Math.floor(Math.random() * messagesArray.length);
+      newMessage = messagesArray[newMessageIndex];
+    }
+    return newMessage;
+  }
+</script>
+</body>
+</html>

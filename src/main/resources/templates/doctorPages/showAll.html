@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="eng" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <style>
+        body
+        {
+            background-color: rgb(206, 210, 236);
+        }
+
+        .info-block > input
+        {
+            outline: none;
+            box-shadow: none;
+            border-radius: 10px;
+            width: 500px;
+            height: 40px;
+            text-align: center;
+        }
+
+    </style>
+</head>
+<body>
+<!-- Nav bar -->
+<nav class="py-2 bg-dark border-bottom">
+    <div class="container d-flex flex-wrap">
+        <ul class="nav me-auto">
+            <li class="nav-item"><a href="/main" class="nav-link link-light px-2">Home</a></li>
+            <li sec:authorize="hasRole('ROLE_ADMIN')" class="nav-item"><a href="/patient/showAll" class="nav-link link-light px-2">Patients</a></li>
+            <li class="nav-item"><a href="/doctor/showAll" class="nav-link link-light px-2 active">Doctors
+                <span class="sr-only">(current)</span></a></li>
+            <li class="nav-item"><a href="/applications/showAll" class="nav-link link-light px-2">Applications</a></li>
+        </ul>
+        <ul class="nav">
+            <li class="nav-item"><a href="/logout" class="nav-link link-light px-2">Logout</a></li>
+        </ul>
+    </div>
+</nav>
+<table class="table" style="width: max-content; margin: 40px auto; background-color: white">
+    <caption>List</caption>
+    <thead class="table-dark">
+    <tr style="text-align: center">
+        <th scope="col" style="width: 30px;">#</th>
+        <th scope="col" style="width: 150px;">Full name</th>
+        <th scope="col" style="width: 230px;">Date of birth</th>
+        <th scope="col" style="width: 200px;">Address</th>
+        <th scope="col" style="width: 120px;">Phone</th>
+        <th scope="col" style="width: 290px;">Email</th>
+        <th scope="col" style="width: 70px;">Gender</th>
+        <th scope="col" style="width: 100px">Specialty</th>
+        <th scope="col" style="width: 100px">Work hours</th>
+        <th sec:authorize="hasRole('ROLE_ADMIN')" scope="col" style="width: 100px">Username</th>
+        <th sec:authorize="hasRole('ROLE_ADMIN')" scope="col" style="min-width: 80px;">Actions</th>
+    </tr>
+    </thead>
+    <tbody style="border: solid 1px black">
+    <tr th:each="dc : ${doctors}">
+        <td th:text="${doctors.indexOf(dc) + 1}"></td>
+        <td th:text="${dc.getPerson().getFullName()}"></td>
+        <td th:text="${dc.getPerson().getDateOfBirth().toString()}"></td>
+        <td th:text="${dc.getPerson().getAddress()}"></td>
+        <td th:text="${dc.getPerson().getTelephoneNumber()}"></td>
+        <td th:text="${dc.getPerson().getEMail()}"></td>
+        <td th:text="${dc.getPerson().getSex().toString()}"></td>
+        <td th:text="${dc.getSpecialty()}"></td>
+        <td th:text="${dc.getStartHour().getHour()}\':\'${dc.getStartHour().getMinute()}-${dc.getEndHour().getHour()}\':\'${dc.getEndHour().getMinute()}"></td>
+        <td th:text="${dc.getUser().getUsername()}"></td>
+        <td sec:authorize="hasRole('ROLE_ADMIN')">
+            <a href="#" style="text-decoration: none">
+                <button type="button" class="btn btn-outline-secondary">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                         class="bi bi-trash-fill" viewBox="0 0 15 15">
+                        <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"></path>
+                    </svg>
+                </button>
+            </a>
+            <a href="#" style="text-decoration: none">
+                <button type="button" class="btn btn-outline-secondary">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                         class="bi bi-pencil-fill" viewBox="0 0 16 16">
+                        <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z"></path>
+                    </svg>
+                </button>
+            </a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
