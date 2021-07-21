@@ -41,6 +41,8 @@
         </ul>
     </div>
 </nav>
+
+<div class="table-responsive mb-5" style="width: max-content; margin: 15px auto auto;">
 <!-- table -->
 <table class="table" style="width: max-content; margin: 40px auto; background-color: white">
     <caption>List</caption>
@@ -80,7 +82,7 @@
                     </svg>
                 </button>
             </a>
-            <a href="#" style="text-decoration: none">
+            <a th:href="@{'/doctor/delete/' + ${dc.getId()}}" style="text-decoration: none">
                 <button type="button" class="btn btn-outline-secondary">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
                          class="bi bi-pencil-fill" viewBox="0 0 16 16">
@@ -92,5 +94,19 @@
     </tr>
     </tbody>
 </table>
+
+    <!--"Add new" button-->
+    <div sec:authorize="hasRole('ROLE_ADMIN')" class="btn-group mb-4" style="width:max-content;margin-left: 5px;">
+        <a href="#">
+            <button type="button" class="btn btn btn-secondary">
+                <svg xmlns="http://www.w3.org/2000/svg" width="29" height="29" fill="currentColor"
+                     class="bi bi-plus-square-fill" viewBox="0 0 19 19">
+                    <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm6.5 4.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3a.5.5 0 0 1 1 0z"></path>
+                </svg>
+                <span>Add new Doctor</span>
+            </button>
+        </a>
+    </div>
+</div>
 </body>
 </html>

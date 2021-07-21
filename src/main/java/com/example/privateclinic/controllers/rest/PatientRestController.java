@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
@@ -29,5 +30,14 @@ public class PatientRestController
 	{
 		model.addAttribute("patients", patientService.getAll());
 		return "patientPages/showAll";
+	}
+
+	@PreAuthorize(value = "hasRole('ROLE_ADMIN')")
+	@RequestMapping(value = "/delete/{id}")
+	public String delete(@PathVariable String id)
+	{
+		patientService.deleteById(id);
+
+		return "redirect:/patient/showAll";
 	}
 }

@@ -7,6 +7,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
@@ -31,5 +32,14 @@ public class DoctorRestController
 		model.addAttribute("doctors", doctorService.getAll());
 
 		return "doctorPages/showAll";
+	}
+
+	@PreAuthorize(value = "hasRole('ROLE_ADMIN')")
+	@RequestMapping(value = "/delete/{id}")
+	public String delete(@PathVariable String id)
+	{
+		doctorService.deleteById(id);
+
+		return "redirect:/doctor/showAll";
 	}
 }
