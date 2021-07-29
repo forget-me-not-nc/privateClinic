@@ -259,26 +259,6 @@
             background-position: 0 -135px;
             color: #00aeef;
         }
-
-        #exception {
-            color: red;
-        }
-        .hiddenElement {
-            display: none;
-        }
-
-        .errorInput
-        {
-            -webkit-box-shadow: 0 0 2px #e32232 inset;
-            -moz-box-shadow: 0 0 2px #e32232 inset;
-            -ms-box-shadow: 0 0 2px #e32232 inset;
-            -o-box-shadow: 0 0 2px #e32232 inset;
-            box-shadow: 0 0 2px #e32232 inset;
-            background-color: #fff;
-            border: 1px solid #e32232;
-            outline: none;
-        }
-
     </style>
 </head>
 <body>
@@ -287,7 +267,7 @@
     <form action="/registration" method="post">
         <h1>Registration Form</h1>
         <div>
-            <input type="text" placeholder="Full name" required="" id="pd" pattern="[A-Za-zА0-9]+\\s?+[A-Za-zА]"
+            <input type="text" placeholder="Full name" required="" id="pd" pattern="[a-zA-Z'-'\s]*"
                    minlength="5"
                    maxlength="50"
                    name="fullName"/>
@@ -302,17 +282,18 @@
             <input type="radio" name="sex" value="OTHER"> Other
         </div>
         <div>
-            <input type="text" placeholder="eMail" required="" id="eMail" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" name="mail"/>
+            <input type="text" placeholder="eMail" required="" id="email"
+                   pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" name="mail"/>
         </div>
         <div>
             <input type="text" placeholder="Address" required="" id="address" minlength="2" maxlength="40" name="address"/>
         </div>
         <div>
-            <input type="text" required="" id="phone" pattern = "[380][0-9]{11}" placeholder="Phone number (380123456789)" name="phone"/>
+            <input type="text" required="" id="phone" pattern="[380][0-9]{11}" placeholder="example (380123456789)"
+                   name="phone"/>
         </div>
         <div>
             <input type="text" placeholder="Username" required="" id="username" name="username"/>
-            <small class="hiddenElement" id="exception">Username already exist</small>
         </div>
         <div>
             <input type="password" placeholder="Password" required="" id="password" name="password"/>
@@ -327,19 +308,41 @@
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script defer>
     const username = document.getElementById("username");
-    const exception = document.getElementById("exception");
-    const button = document.getElementById("submitButton")
+    const phone = document.getElementById("phone");
+    const email = document.getElementById("email");
     username.oninput = () => {
-        axios.get(`http://localhost:8080/user/exist?username=${username.value}`)
-        .then((response)=>{
-            if (response.data){
-                exception.classList.remove("hiddenElement");
-                username.setCustomValidity("Invalid field.");
-            } else {
-                exception.classList.add("hiddenElement");
-                username.setCustomValidity("");
-            }
-        })
+        axios.get(`http://localhost:8080/api/user/exist?username=${username.value}`)
+            .then((response) => {
+                if (response.data) {
+                    username.setCustomValidity("Username already exist!");
+                } else {
+                    username.setCustomValidity("");
+                }
+            })
+    }
+
+    phone.oninput = () => {
+        axios.get(`http://localhost:8080/api/patient/isPhoneValid?phone=${phone.value}`)
+            .then((response) => {
+                if (response.data) {
+                    phone.setCustomValidity("Phone number is already registered!");
+                } else {
+                    phone.setCustomValidity("");
+                }
+            })
+    }
+
+    email.oninput = () => {
+        axios.get(`http://localhost:8080/api/patient/isEmailValid?email=${email.value}`)
+            .then((response) => {
+                if (response.data) {
+                    email.setCustomValidity("Email is already registered!");
+                } else {
+                    email.setCustomValidity("");
+                }
+
+                console.log(response.data);
+            })
     }
 </script>
 </body>

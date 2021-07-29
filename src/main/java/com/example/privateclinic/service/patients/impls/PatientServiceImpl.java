@@ -4,6 +4,7 @@ import com.example.privateclinic.models.Patient;
 import com.example.privateclinic.models.User;
 import com.example.privateclinic.repository.PatientRepository;
 import com.example.privateclinic.service.patients.interfaces.IPatientService;
+import com.example.privateclinic.service.users.impls.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,6 +25,9 @@ public class PatientServiceImpl implements IPatientService
 {
 	@Autowired
 	PatientRepository patientRepository;
+
+	@Autowired
+	UserServiceImpl userService;
 
 	@Override
 	public Optional<Patient> findByUser(User user)
@@ -46,6 +50,10 @@ public class PatientServiceImpl implements IPatientService
 	@Override
 	public void deleteById(String id)
 	{
+		Patient patient = getById(id);
+
+		userService.deleteByUsername(patient.getUser().getUsername());
+
 		patientRepository.deleteById(id);
 	}
 
@@ -60,4 +68,17 @@ public class PatientServiceImpl implements IPatientService
 	{
 		return patientRepository.save(patient);
 	}
+
+	@Override
+	public Optional<Patient> findByPhone(String phone)
+	{
+		return patientRepository.findByPerson_TelephoneNumber(phone);
+	}
+
+	@Override
+	public Optional<Patient> findByEmail(String email)
+	{
+		return patientRepository.findByPerson_Email(email);
+	}
+
 }

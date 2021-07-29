@@ -6,6 +6,7 @@ import com.example.privateclinic.service.users.interfaces.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -30,6 +31,12 @@ public class UserServiceImpl implements IUserService
 	}
 
 	@Override
+	public List<User> getAll()
+	{
+		return userRepository.findAll();
+	}
+
+	@Override
 	public User getById(String id)
 	{
 		return userRepository.findById(id).orElse(null);
@@ -51,6 +58,12 @@ public class UserServiceImpl implements IUserService
 	public User update(User user)
 	{
 		return userRepository.save(user);
+	}
+
+	@Override
+	public void deleteByUsername(String username)
+	{
+		userRepository.deleteByUsername(username);
 	}
 
 }

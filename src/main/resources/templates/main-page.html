@@ -80,9 +80,11 @@
         <ul class="nav me-auto">
             <li class="nav-item"><a href="/main" class="nav-link link-light px-2 active" aria-current="page">Home
                 <span class="sr-only">(current)</span></a></li>
-            <li class="nav-item"><a href="/doctor/showAll" class="nav-link link-light px-2">Doctors</a></li>
+            <li class="nav-item"><a href="/ui/doctor/showAll" class="nav-link link-light px-2">Doctors</a></li>
             <li sec:authorize="hasRole('ROLE_ADMIN')" class="nav-item">
-                <a href="/patient/showAll" class="nav-link link-light px-2" aria-current="page">Patients</a>
+                <a href="/ui/patient/showAll" class="nav-link link-light px-2" aria-current="page">Patients</a>
+            </li>
+            <li class="nav-item"><a href="/ui/application/showAll" class="nav-link link-light px-2">Applications</a>
             </li>
         </ul>
         <ul class="nav">
@@ -142,7 +144,7 @@
         </div>
         <div class="info-block">
             <label>
-                <input type="text" class="custom-input" th:value="${user.getEMail()}" disabled>
+                <input type="text" class="custom-input" th:value="${user.getEmail()}" disabled>
             </label>
         </div>
 

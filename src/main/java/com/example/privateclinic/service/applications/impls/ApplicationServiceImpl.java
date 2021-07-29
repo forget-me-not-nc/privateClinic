@@ -6,6 +6,8 @@ import com.example.privateclinic.service.applications.interfaces.IApplicationSer
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 /**
  * Created by IntelliJ IDEA.
  * privateClinic.ApplicationServiceImpl
@@ -20,6 +22,12 @@ public class ApplicationServiceImpl implements IApplicationService
 {
 	@Autowired
 	ApplicationRepository applicationRepository;
+
+	@Override
+	public List<Application> getAll()
+	{
+		return applicationRepository.findAll();
+	}
 
 	@Override
 	public Application getById(String id)

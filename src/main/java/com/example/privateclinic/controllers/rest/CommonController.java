@@ -8,7 +8,6 @@ import com.example.privateclinic.service.users.impls.UserServiceImpl;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -20,12 +19,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.server.ResponseStatusException;
 
-import javax.annotation.PostConstruct;
 import java.text.SimpleDateFormat;
-import java.time.LocalTime;
-import java.util.Arrays;
 import java.util.Collections;
-import java.util.Date;
 import java.util.Optional;
 
 /**
@@ -90,7 +85,7 @@ public class CommonController
 									.address(address)
 									.dateOfBirth(new SimpleDateFormat("yyyy-MM-dd").parse(
 											dateOfBirth))
-									.eMail(eMail)
+									.email(eMail)
 									.fullName(fullName)
 									.telephoneNumber(phone)
 									.sex(Sex.valueOf(sex))

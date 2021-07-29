@@ -2,6 +2,7 @@ package com.example.privateclinic.service.patients.interfaces;
 
 import com.example.privateclinic.models.Patient;
 import com.example.privateclinic.models.User;
+import com.example.privateclinic.service.IGenericService;
 
 import java.util.List;
 import java.util.Optional;
@@ -15,7 +16,7 @@ import java.util.Optional;
  * @since 18.07.2021|20:52
  */
 
-public interface IPatientService
+public interface IPatientService extends IGenericService<Patient>
 {
 	Optional<Patient> findByUser(User user);
 
@@ -28,4 +29,8 @@ public interface IPatientService
 	Patient create(Patient patient);
 
 	Patient update(Patient patient);
+
+	Optional<Patient> findByPhone(String phone);
+
+	Optional<Patient> findByEmail(String email);
 }

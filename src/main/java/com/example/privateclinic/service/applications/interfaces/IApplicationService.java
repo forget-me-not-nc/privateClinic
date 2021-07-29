@@ -1,10 +1,7 @@
 package com.example.privateclinic.service.applications.interfaces;
 
 import com.example.privateclinic.models.Application;
-import com.example.privateclinic.models.User;
-import org.springframework.stereotype.Service;
-
-import java.util.Optional;
+import com.example.privateclinic.service.IGenericService;
 
 /**
  * Created by IntelliJ IDEA.
@@ -15,7 +12,7 @@ import java.util.Optional;
  * @since 18.07.2021|20:43
  */
 
-public interface IApplicationService
+public interface IApplicationService extends IGenericService<Application>
 {
 	Application getById(String id);
 

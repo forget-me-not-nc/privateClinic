@@ -9,11 +9,8 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-
-import javax.annotation.PostConstruct;
 
 /**
  * Created by IntelliJ IDEA.
@@ -43,8 +40,15 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter
 	{
 		http
 				.csrf().disable()
-					.authorizeRequests()
-					.antMatchers("/login", "/registration", "/user/exist/**").permitAll()
+				.authorizeRequests()
+				.antMatchers(
+						"/login",
+						"/registration",
+						"/api/user/exist/**",
+						"/api/patient/isPhoneValid/**",
+						"/api/patient/isEmailValid/**",
+						"/api/doctor/isEmailValid/**",
+						"/api/doctor/isPhoneValid/**").permitAll()
 					.anyRequest().authenticated()
 				.and()
 					.formLogin()

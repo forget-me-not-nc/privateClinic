@@ -1,6 +1,7 @@
 package com.example.privateclinic.service.users.interfaces;
 
 import com.example.privateclinic.models.User;
+import com.example.privateclinic.service.IGenericService;
 
 import java.util.Optional;
 
@@ -13,7 +14,7 @@ import java.util.Optional;
  * @since 03.07.2021|21:38
  */
 
-public interface IUserService
+public interface IUserService extends IGenericService<User>
 {
 	Optional<User> findUserByUsername(String username);
 
@@ -24,4 +25,6 @@ public interface IUserService
 	User create(User user);
 
 	User update(User user);
+
+	void deleteByUsername(String username);
 }

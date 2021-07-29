@@ -22,6 +22,6 @@ public class Person
 	private Date dateOfBirth;
 	private String address;
 	private String telephoneNumber;
-	private String eMail;
+	private String email;
 	private Sex sex;
 }

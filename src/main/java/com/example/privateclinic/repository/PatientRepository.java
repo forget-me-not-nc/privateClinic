@@ -20,4 +20,8 @@ import java.util.Optional;
 public interface PatientRepository extends MongoRepository<Patient, String>
 {
 	Optional<Patient> findByUser(User user);
+
+	Optional<Patient> findByPerson_TelephoneNumber(String phone);
+
+	Optional<Patient> findByPerson_Email(String email);
 }
