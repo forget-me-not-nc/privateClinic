@@ -84,10 +84,12 @@
             <li sec:authorize="hasRole('ROLE_ADMIN')" class="nav-item">
                 <a href="/ui/patient/showAll" class="nav-link link-light px-2" aria-current="page">Patients</a>
             </li>
-            <li class="nav-item"><a href="/ui/application/showAll" class="nav-link link-light px-2">Applications</a>
-            </li>
+                <li class="nav-item"><a href="/ui/application/showAll" class="nav-link link-light px-2">Applications</a>
+                </li>
         </ul>
         <ul class="nav">
+            <li class="nav-item"><input style="position: relative; top: 8px; height: 25px;" type="text"
+                                        th:value="${#authentication.name}" disabled></li>
             <li class="nav-item"><a href="/logout" class="nav-link link-light px-2">Logout</a></li>
         </ul>
     </div>
@@ -175,6 +177,20 @@
                        th:value="${#temporals.format(doctorInfo.getStartHour(), 'HH:mm')} + '-' + ${#temporals.format(doctorInfo.getEndHour(), 'HH:mm')}"
                        disabled>
             </label>
+        </div>
+        <div sec:authorize="hasRole('ROLE_DOCTOR')" class="text-block">
+            <a style="text-decoration: none; margin: auto" th:href="@{'/ui/doctor/update/' + ${id}}">
+                <button type="button" class="btn btn-outline-secondary">
+                    Redact
+                </button>
+            </a>
+        </div>
+        <div sec:authorize="hasRole('ROLE_PATIENT')" class="text-block">
+            <a style="text-decoration: none; margin: auto" th:href="@{'/ui/patient/update/' + ${id}}">
+                <button type="button" class="btn btn-outline-secondary">
+                    Redact
+                </button>
+            </a>
         </div>
     </div>
     <div th:if="${user == null}" class="info-block" style="text-align: center; margin: auto; font-weight: 600">

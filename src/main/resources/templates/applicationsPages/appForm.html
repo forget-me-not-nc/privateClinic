@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Creation Form</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <style>
+        #form-container {
+            margin: 30px auto;
+            width: 600px;
+            background-color: rgb(240, 240, 240);
+            padding: 15px;
+            border-radius: 15px;
+            box-shadow: 0 0 100px rgba(0, 0, 0, 0.62);
+            border: solid 1px rgba(0, 0, 0, 0.76)
+        }
+
+        body {
+            background-color: rgb(206, 210, 236);
+        }
+    </style>
+</head>
+<body>
+<div id="form-container">
+    <form method="post">
+        <p class="fw-bolder ">Application creation form:</p>
+        <div hidden class="input-group mb-3">
+            <span class="input-group-text">Doctor id:</span>
+            <input type="text" th:value="${doctor.getId()}" id="doctorId" class="form-control" required name="id">
+        </div>
+        <div class="input-group mb-3">
+            <span class="input-group-text">Select date:</span>
+            <input type="date" id="date" class="form-control" required name="date">
+        </div>
+        <div class="input-group mb-3">
+            <span class="input-group-text">Select time:</span>
+            <select class="form-select form-select-sm" id="time">
+
+            </select>
+        </div>
+        <a style="text-decoration: none" href="/ui/application/showAll">
+            <button type="button" class="btn btn-outline-secondary">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                     class="bi bi-chevron-double-left" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd"
+                          d="M8.354 1.646a.5.5 0 0 1 0 .708L2.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/>
+                    <path fill-rule="evenodd"
+                          d="M12.354 1.646a.5.5 0 0 1 0 .708L6.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/>
+                </svg>
+                Back
+            </button>
+        </a>
+        <button type="submit" class="btn btn-outline-secondary">
+            Submit
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="19" fill="currentColor"
+                 class="bi bi-chevron-double-right" viewBox="0 0 12 19">
+                <path fill-rule="evenodd"
+                      d="M3.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L9.293 8 3.646 2.354a.5.5 0 0 1 0-.708z"></path>
+                <path fill-rule="evenodd"
+                      d="M7.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L13.293 8 7.646 2.354a.5.5 0 0 1 0-.708z"></path>
+            </svg>
+        </button>
+    </form>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script defer>
+        const date = document.getElementById("date");
+        const id = document.getElementById("doctorId")
+        const time = document.getElementById("time");
+
+        date.oninput = () => {
+            removeAllOptions();
+            axios.get(`http://localhost:8080/api/application/getAvailableTime?date=${date.value}&doctorId=${id.value}`)
+                .then((response) => {
+                    response.data.forEach(
+                        el => {
+                            let opt = document.createElement("option");
+                            opt.value = el;
+                            opt.text = el;
+
+                            time.add(opt, null);
+                        }
+                    )
+                })
+        }
+
+        function removeAllOptions() {
+            for (let i = time.options.length - 1; i >= 0; i--) {
+                time.options[i] = null;
+            }
+        }
+
+    </script>
+</div>
+</body>
+</html>

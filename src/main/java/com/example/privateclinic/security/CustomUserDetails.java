@@ -21,9 +21,9 @@ import java.util.stream.Collectors;
 
 public class CustomUserDetails implements UserDetails
 {
-	private final String username;
-	private final String password;
-	private final List<Roles> roles;
+	private String username;
+	private String password;
+	private List<Roles> roles;
 
 	public CustomUserDetails(User user)
 	{
@@ -38,6 +38,21 @@ public class CustomUserDetails implements UserDetails
 		return roles.stream()
 				.map(el -> new SimpleGrantedAuthority(el.toString()))
 				.collect(Collectors.toList());
+	}
+
+	public void setUsername(String username)
+	{
+		this.username = username;
+	}
+
+	public void setPassword(String password)
+	{
+		this.password = password;
+	}
+
+	public void setRoles(List<Roles> roles)
+	{
+		this.roles = roles;
 	}
 
 	@Override

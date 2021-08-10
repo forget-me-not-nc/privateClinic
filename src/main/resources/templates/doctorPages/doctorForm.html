@@ -28,32 +28,30 @@
         <p class="fw-bolder ">Doctor creation form:</p>
         <div class="input-group mb-3">
             <span class="input-group-text">Full name:</span>
-            <input type="text" th:value="${doctor == null?'' : doctor.getPerson().getFullName()}" class="form-control"
+            <input type="text" th:value="${doctor.getPerson().getFullName()}" class="form-control"
                    placeholder="Doctor`s full name" required name="fullName"
                    pattern="[A-Za-zА0-9]+\s?+[A-Za-zА]" maxlength="100" min="2">
         </div>
         <div class="input-group mb-3">
             <span class="input-group-text">Specialty:</span>
-            <input type="text" th:value="${doctor == null?'' : doctor.getSpecialty()}" class="form-control"
+            <input type="text" th:value="${doctor.getSpecialty()}" class="form-control"
                    placeholder="Doctor`s specialty" required name="specialty"
                    pattern="[A-Za-zА0-9]+\s?+[A-Za-zА]" maxlength="100" min="1">
         </div>
         <div class="input-group mb-3">
             <span class="input-group-text">Getting Started:</span>
-            <input type="text" th:value="${doctor == null?'' : doctor.getStartHour().getHour()}" placeholder="h"
-                   class="form-control" name="startHour" pattern="[0-9]+" minlength="1" maxlength="2">
-            <input type="text" th:value="${doctor == null?'' : doctor.getStartHour().getMinute()}" placeholder="m"
-                   class="form-control" name="startMinute" pattern="[0-9]+" minlength="1" maxlength="2">
+            <input type="time" th:value="${#temporals.format(doctor.getStartHour(), 'HH:mm')}" placeholder="h"
+                   id="inputStartTime"
+                   class="form-control" name="startTime" min="05:00" max="23:00" required>
             <span class="input-group-text">End of work:</span>
-            <input type="text" th:value="${doctor == null?'' : doctor.getEndHour().getHour()}" placeholder="h"
-                   class="form-control" name="endHour" pattern="[0-9]+" minlength="1" maxlength="2">
-            <input type="text" th:value="${doctor == null?'' : doctor.getEndHour().getMinute()}" placeholder="m"
-                   class="form-control" name="endMinute" pattern="[0-9]+" minlength="1" maxlength="2">
+            <input type="time" th:value="${#temporals.format(doctor.getEndHour(), 'HH:mm')}" placeholder="h"
+                   id="inputEndTime"
+                   class="form-control" name="endTime" min="05:00" max="23:00" required>
         </div>
         <div class="input-group mb-3">
             <span class="input-group-text">Date of birth:</span>
             <input type="date"
-                   th:value="${doctor} ? ${#dates.format(doctor.getPerson().getDateOfBirth(), 'yyyy-MM-dd')}"
+                   th:value="${#dates.format(doctor.getPerson().getDateOfBirth(), 'yyyy-MM-dd')}"
                    class="form-control" required name="date">
         </div>
         <div class="input-group mb-3">
@@ -61,48 +59,48 @@
             <div style="width: max-content; margin: auto;">
                 <div class="form-check form-check-inline">
                     <input class="form-check-input" type="radio" value="FEMALE" name="sex"
-                           th:checked="${doctor} ? ${#strings.equals(doctor.getPerson().getSex().toString(), 'FEMALE')}">
+                           th:checked="${#strings.equals(doctor.getPerson().getSex().toString(), 'FEMALE')}">
                     <label class="form-check-label">Female</label>
                 </div>
                 <div class="form-check form-check-inline">
                     <input class="form-check-input" type="radio" value="MALE" name="sex"
-                           th:checked="${doctor} ? ${#strings.equals(doctor.getPerson().getSex().toString(), 'MALE')}">
+                           th:checked="${#strings.equals(doctor.getPerson().getSex().toString(), 'MALE')}">
                     <label class="form-check-label">Male</label>
                 </div>
                 <div class="form-check form-check-inline">
                     <input class="form-check-input" type="radio" value="OTHER" name="sex"
-                           th:checked="${doctor} ? ${#strings.equals(doctor.getPerson().getSex().toString(), 'OTHER')}">
+                           th:checked="${#strings.equals(doctor.getPerson().getSex().toString(), 'OTHER')}">
                     <label class="form-check-label">Other</label>
                 </div>
             </div>
         </div>
         <div class="input-group mb-3">
             <span class="input-group-text">E-mail:</span>
-            <input type="text" id="email" th:value="${doctor == null?'' : doctor.getPerson().getEmail()}"
+            <input type="text" id="email" th:value="${doctor.getPerson().getEmail()}"
                    class="form-control" placeholder="example.email@gmail.com" required name="mail"
                    pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
         </div>
         <div class="input-group mb-3">
             <span class="input-group-text">Address:</span>
-            <input type="text" th:value="${doctor == null?'' : doctor.getPerson().getAddress()}" class="form-control"
+            <input type="text" th:value="${doctor.getPerson().getAddress()}" class="form-control"
                    placeholder="Doctor`s address" required name="address"
                    minlength="0" maxlength="100">
         </div>
         <div class="input-group mb-3">
             <span class="input-group-text">Phone number:</span>
-            <input type="text" id="phoneInput" th:value="${doctor == null?'' : doctor.getPerson().getTelephoneNumber()}"
+            <input type="text" id="phoneInput" th:value="${doctor.getPerson().getTelephoneNumber()}"
                    class="form-control" placeholder="example: 380537496709" required name="phone"
                    pattern="[380][0-9]{11}">
         </div>
         <div class="input-group mb-3">
             <span class="input-group-text">Username:</span>
-            <input type="text" id="usernameInput" th:value="${doctor == null?'' : doctor.getUser().getUsername()}"
+            <input type="text" id="usernameInput" th:value="${doctor.getUser().getUsername()}"
                    class="form-control" placeholder="Account username" required name="username"
                    minlength="5" maxlength="100">
         </div>
         <div class="input-group mb-3">
             <span class="input-group-text">Password:</span>
-            <input type="text" class="form-control" placeholder="Account password" required name="password"
+            <input type="password" class="form-control" placeholder="Account password" required name="password"
                    minlength="5" maxlength="100">
         </div>
         <a style="text-decoration: none" href="/ui/doctor/showAll">
@@ -131,29 +129,54 @@
 </div>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script defer>
-    const phoneInput = document.getElementById("phoneInput");
-    const usernameInput = document.getElementById("usernameInput");
+    const phone = document.getElementById("phoneInput");
+    const username = document.getElementById("usernameInput");
     const email = document.getElementById("email");
-    usernameInput.oninput = () => {
-        axios.get(`http://localhost:8080/api/user/exist?username=${usernameInput.value}`)
+    const start = document.getElementById("inputStartTime");
+    const end = document.getElementById("inputEndTime");
+
+    start.oninput = () => {
+        checkTime();
+    };
+
+    end.oninput = () => {
+        checkTime();
+    };
+
+    function checkTime() {
+        const date = "2002-01-01T";
+
+        if (Date.parse(date + end.value) - Date.parse(date + start.value) < 3 * 60 * 60 * 1000) {
+            start.setCustomValidity("Invalid time");
+            end.setCustomValidity("Invalid time");
+        } else {
+            start.setCustomValidity("");
+            end.setCustomValidity("");
+        }
+    }
+
+
+    username.oninput = () => {
+        axios.get(`http://localhost:8080/api/user/exist?username=${username.value}`)
             .then((response) => {
                 if (response.data) {
-                    usernameInput.setCustomValidity("Username already exist!");
+                    username.setCustomValidity("Username already exist!");
                 } else {
-                    usernameInput.setCustomValidity("");
+                    username.setCustomValidity("");
                 }
             })
-    }
-    phoneInput.oninput = () => {
-        axios.get(`http://localhost:8080/api/doctor/isPhoneValid?phone=${phoneInput.value}`)
+    };
+
+    phone.oninput = () => {
+        axios.get(`http://localhost:8080/api/doctor/isPhoneValid?phone=${phone.value}`)
             .then((response) => {
                 if (response.data) {
-                    phoneInput.setCustomValidity("Phone number already registered!");
+                    phone.setCustomValidity("Phone number already registered!");
                 } else {
-                    phoneInput.setCustomValidity("");
+                    phone.setCustomValidity("");
                 }
             })
-    }
+    };
 
     email.oninput = () => {
         axios.get(`http://localhost:8080/api/doctor/isEmailValid?email=${email.value}`)
@@ -164,7 +187,7 @@
                     email.setCustomValidity("");
                 }
             })
-    }
+    };
 </script>
 </body>
 </html>

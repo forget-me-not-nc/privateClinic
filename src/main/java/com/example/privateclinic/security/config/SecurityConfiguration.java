@@ -48,7 +48,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter
 						"/api/patient/isPhoneValid/**",
 						"/api/patient/isEmailValid/**",
 						"/api/doctor/isEmailValid/**",
-						"/api/doctor/isPhoneValid/**").permitAll()
+						"/api/doctor/isPhoneValid/**",
+						"/api/application/getAvailableTime/**").permitAll()
 					.anyRequest().authenticated()
 				.and()
 					.formLogin()

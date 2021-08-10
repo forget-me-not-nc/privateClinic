@@ -1,11 +1,13 @@
 package com.example.privateclinic.service.applications.impls;
 
 import com.example.privateclinic.models.Application;
+import com.example.privateclinic.models.User;
 import com.example.privateclinic.repository.ApplicationRepository;
 import com.example.privateclinic.service.applications.interfaces.IApplicationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -52,4 +54,26 @@ public class ApplicationServiceImpl implements IApplicationService
 	{
 		return applicationRepository.save(application);
 	}
+
+	@Override
+	public List<Application> findDoctorsApplications(User user)
+	{
+		return applicationRepository.findByDoctor_User(user);
+	}
+
+	@Override
+	public List<Application> findPatientsApplications(User user)
+	{
+		return applicationRepository.findByPatient_User(user);
+	}
+
+	@Override
+	public List<Application> findAvailableTime(
+			String id, LocalDateTime start, LocalDateTime end
+	)
+	{
+		return applicationRepository.findAvailableTime(id, start, end);
+	}
+
+
 }

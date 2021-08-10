@@ -36,8 +36,12 @@
                     <span class="sr-only">(current)</span>
                 </a>
             </li>
+            <li class="nav-item"><a href="/ui/application/showAll" class="nav-link link-light px-2">Applications</a>
+            </li>
         </ul>
         <ul class="nav">
+            <li class="nav-item"><input style="position: relative; top: 8px; height: 25px;" type="text"
+                                        th:value="${#authentication.name}" disabled></li>
             <li class="nav-item"><a href="/logout" class="nav-link link-light px-2">Logout</a></li>
         </ul>
     </div>
@@ -79,7 +83,7 @@
                     </svg>
                 </button>
             </a>
-            <a href="#" style="text-decoration: none">
+            <a th:href="@{'/ui/patient/update/' + ${pt.getId()}}" style="text-decoration: none">
                 <button type="button" class="btn btn-outline-secondary">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
                          class="bi bi-pencil-fill" viewBox="0 0 16 16">

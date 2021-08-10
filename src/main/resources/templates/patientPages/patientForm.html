@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Creation Form</title>
@@ -29,53 +29,66 @@
         <p class="fw-bolder ">Doctor creation form:</p>
         <div class="input-group mb-3">
             <span class="input-group-text">Full name:</span>
-            <input type="text" class="form-control" placeholder="Patient`s full name" required name="fullName"
-                   pattern="[A-Za-zА0-9]+\\s?+[A-Za-zА]" maxlength="100" min="2">
+            <input type="text" th:value="${patient.getPerson().getFullName()}" class="form-control"
+                   placeholder="Patient`s full name" required name="fullName"
+                   pattern="[A-Za-zА0-9]+\s?+[A-Za-zА]" maxlength="100" min="2">
         </div>
         <div class="input-group mb-3">
             <span class="input-group-text">Date of birth:</span>
-            <input type="date" class="form-control" required name="date">
+            <input type="date"
+                   th:value="${#dates.format(patient.getPerson().getDateOfBirth(), 'yyyy-MM-dd')}"
+                   class="form-control" required name="date">
         </div>
         <div class="input-group mb-3">
             <span class="input-group-text">Gender:</span>
             <div style="width: max-content; margin: auto;">
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" value="FEMALE" name="sex">
+                    <input th:checked="${#strings.equals(patient.getPerson().getSex().toString(), 'FEMALE')}"
+                           class="form-check-input" type="radio" value="FEMALE" name="sex">
                     <label class="form-check-label">FEMALE</label>
                 </div>
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" value="MALE" name="sex">
+                    <input th:checked="${#strings.equals(patient.getPerson().getSex().toString(), 'MALE')}"
+                           class="form-check-input" type="radio" value="MALE" name="sex">
                     <label class="form-check-label">MALE</label>
                 </div>
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" value="OTHER" name="sex">
+                    <input th:checked="${#strings.equals(patient.getPerson().getSex().toString(), 'OTHER')}"
+                           class="form-check-input" type="radio" value="OTHER" name="sex">
                     <label class="form-check-label">OTHER</label>
                 </div>
             </div>
         </div>
         <div class="input-group mb-3">
             <span class="input-group-text">E-mail:</span>
-            <input type="text" class="form-control" placeholder="example.email@gmail.com" required name="mail"
+            <input type="text" th:value="${patient.getPerson().getEmail()}"
+                   id="email"
+                   class="form-control" placeholder="example.email@gmail.com" required name="mail"
                    pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
         </div>
         <div class="input-group mb-3">
             <span class="input-group-text">Address:</span>
-            <input type="text" class="form-control" placeholder="Patient`s address" required name="address"
+            <input th:value="${patient.getPerson().getAddress()}"
+                   type="text" class="form-control" placeholder="Patient`s address" required name="address"
                    minlength="0" maxlength="100">
         </div>
         <div class="input-group mb-3">
             <span class="input-group-text">Phone number:</span>
-            <input type="text" class="form-control" placeholder="example: 380537496709" required name="phone"
+            <input th:value="${patient.getPerson().getTelephoneNumber()}"
+                   id="phoneInput"
+                   type="text" class="form-control" placeholder="example: 380537496709" required name="phone"
                    pattern="[380][0-9]{11}">
         </div>
         <div class="input-group mb-3">
             <span class="input-group-text">Username:</span>
-            <input type="text" class="form-control" placeholder="Account username" required name="username"
+            <input th:value="${patient.getUser().getUsername()}"
+                   id="usernameInput"
+                   type="text" class="form-control" placeholder="Account username" required name="username"
                    minlength="5" maxlength="100">
         </div>
         <div class="input-group mb-3">
             <span class="input-group-text">Password:</span>
-            <input type="text" class="form-control" placeholder="Account password" required name="password"
+            <input type="password" class="form-control" placeholder="Account password" required name="password"
                    minlength="5" maxlength="100">
         </div>
         <a style="text-decoration: none" href="/ui/patient/showAll">
@@ -104,7 +117,42 @@
 </div>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script defer>
+    const phone = document.getElementById("phoneInput");
+    const username = document.getElementById("usernameInput");
+    const email = document.getElementById("email");
 
+    username.oninput = () => {
+        axios.get(`http://localhost:8080/api/user/exist?username=${username.value}`)
+            .then((response) => {
+                if (response.data) {
+                    username.setCustomValidity("Username already exist!");
+                } else {
+                    username.setCustomValidity("");
+                }
+            })
+    };
+
+    phone.oninput = () => {
+        axios.get(`http://localhost:8080/api/patient/isPhoneValid?phone=${phone.value}`)
+            .then((response) => {
+                if (response.data) {
+                    phone.setCustomValidity("Phone number already registered!");
+                } else {
+                    phone.setCustomValidity("");
+                }
+            })
+    };
+
+    email.oninput = () => {
+        axios.get(`http://localhost:8080/api/patient/isEmailValid?email=${email.value}`)
+            .then((response) => {
+                if (response.data) {
+                    email.setCustomValidity("Email is already registered!");
+                } else {
+                    email.setCustomValidity("");
+                }
+            })
+    };
 
 </script>
 </body>

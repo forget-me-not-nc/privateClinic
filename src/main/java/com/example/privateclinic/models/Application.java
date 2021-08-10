@@ -4,7 +4,7 @@ import lombok.Builder;
 import lombok.Data;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 /**
  * Created by IntelliJ IDEA.
@@ -23,5 +23,5 @@ public class Application
 	private String id;
 	private Patient patient;
 	private Doctor doctor;
-	private Date date;
+	private LocalDateTime date;
 }

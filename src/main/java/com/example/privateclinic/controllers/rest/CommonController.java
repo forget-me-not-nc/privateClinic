@@ -121,6 +121,7 @@ public class CommonController
 				if(patient.isPresent())
 				{
 					model.addAttribute("user", patient.get().getPerson());
+					model.addAttribute("id", patient.get().getId());
 				}
 				else throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR);
 			}
@@ -139,6 +140,7 @@ public class CommonController
 				{
 					model.addAttribute("user", doctor.get().getPerson());
 					model.addAttribute("doctorInfo", doctor.get());
+					model.addAttribute("id", doctor.get().getId());
 				}
 				else throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR);
 			}
