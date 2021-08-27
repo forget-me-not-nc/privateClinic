@@ -86,6 +86,15 @@
             </li>
                 <li class="nav-item"><a href="/ui/application/showAll" class="nav-link link-light px-2">Applications</a>
                 </li>
+            <li sec:authorize="hasRole('ROLE_ADMIN')" class="nav-item">
+                <a href="/ui/procedures/showAll" class="nav-link link-light px-2" aria-current="page">Procedures</a>
+            </li>
+            <li sec:authorize="hasRole('ROLE_DOCTOR') and !hasRole('ROLE_ADMIN')" class="nav-item">
+                <a href="/ui/patient/showAll" class="nav-link link-light px-2" aria-current="page">My Patients</a>
+            </li>
+            <li sec:authorize="hasRole('ROLE_PATIENT') and !hasRole('ROLE_ADMIN')" class="nav-item">
+                <a href="/ui/assignedProcedures/showAll" class="nav-link link-light px-2" aria-current="page">My procedures</a>
+            </li>
         </ul>
         <ul class="nav">
             <li class="nav-item"><input style="position: relative; top: 8px; height: 25px;" type="text"

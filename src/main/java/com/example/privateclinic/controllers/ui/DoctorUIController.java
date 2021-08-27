@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -201,7 +202,7 @@ public class DoctorUIController
 			Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 			CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();
 
-			if (!userDetails.getAuthorities().contains(Roles.ROLE_ADMIN))
+			if (!userDetails.getAuthorities().contains(new SimpleGrantedAuthority(Roles.ROLE_ADMIN.toString())))
 			{
 				userDetails.setUsername(username);
 				userDetails.setPassword(new BCryptPasswordEncoder().encode(password));

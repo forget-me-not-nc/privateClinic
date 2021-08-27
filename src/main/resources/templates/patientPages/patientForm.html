@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Creation Form</title>
+    <title>Form</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
@@ -26,7 +26,7 @@
 <body>
 <div id="form-container">
     <form method="post">
-        <p class="fw-bolder ">Doctor creation form:</p>
+        <p class="fw-bolder ">Patient form:</p>
         <div class="input-group mb-3">
             <span class="input-group-text">Full name:</span>
             <input type="text" th:value="${patient.getPerson().getFullName()}" class="form-control"
@@ -91,7 +91,7 @@
             <input type="password" class="form-control" placeholder="Account password" required name="password"
                    minlength="5" maxlength="100">
         </div>
-        <a style="text-decoration: none" href="/ui/patient/showAll">
+        <a style="text-decoration: none" href="/main">
             <button type="button" class="btn btn-outline-secondary">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                      class="bi bi-chevron-double-left" viewBox="0 0 16 16">

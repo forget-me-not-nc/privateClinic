@@ -1,6 +1,7 @@
 package com.example.privateclinic.repository;
 
 import com.example.privateclinic.models.Application;
+import com.example.privateclinic.models.Doctor;
 import com.example.privateclinic.models.User;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Query;
@@ -40,4 +41,6 @@ public interface ApplicationRepository extends MongoRepository<Application, Stri
 	List<Application> findAvailableTime(String id, LocalDateTime start, LocalDateTime end);
 
 	List<Application> findByDoctor_User(User user);
+
+	List<Application> findAllByDoctor_Id(String id);
 }

@@ -21,6 +21,10 @@
             text-align: center;
         }
 
+        td {
+            text-align: center;
+        }
+
     </style>
 </head>
 <body>
@@ -37,6 +41,16 @@
                 </a>
             </li>
             <li class="nav-item"><a href="/ui/application/showAll" class="nav-link link-light px-2">Applications</a>
+            </li>
+            <li sec:authorize="hasRole('ROLE_ADMIN')" class="nav-item">
+                <a href="/ui/procedures/showAll" class="nav-link link-light px-2" aria-current="page">Procedures</a>
+            </li>
+            <li sec:authorize="hasRole('ROLE_DOCTOR') and !hasRole('ROLE_ADMIN')" class="nav-item">
+                <a href="/ui/patient/showAll" class="nav-link link-light px-2 active" aria-current="page">
+                    My Patients<span class="sr-only">(current)</span></a>
+            </li>
+            <li sec:authorize="hasRole('ROLE_PATIENT') and !hasRole('ROLE_ADMIN')" class="nav-item">
+                <a href="/ui/assignedProcedures/showAll" class="nav-link link-light px-2" aria-current="page">My procedures</a>
             </li>
         </ul>
         <ul class="nav">
@@ -56,12 +70,12 @@
         <th scope="col" style="width: 30px;">#</th>
         <th scope="col" style="width: 150px;">Full name</th>
         <th scope="col" style="width: 230px;">Date of birth</th>
-        <th scope="col" style="width: 200px;">Address</th>
+        <th sec:authorize="hasRole('ROLE_ADMIN')" scope="col" style="width: 200px;">Address</th>
         <th scope="col" style="width: 120px;">Phone</th>
         <th scope="col" style="width: 290px;">Email</th>
         <th scope="col" style="width: 70px;">Gender</th>
-        <th scope="col" style="width: 100px">Username</th>
-        <th scope="col" style="min-width: 80px;">Actions</th>
+        <th sec:authorize="hasRole('ROLE_ADMIN')" scope="col" style="width: 100px">Username</th>
+        <th sec:authorize="hasRole('ROLE_DOCTOR')" scope="col" style="min-width: 80px;">Actions</th>
     </tr>
     </thead>
     <tbody style="border: solid 1px black">
@@ -69,13 +83,13 @@
         <td th:text="${patients.indexOf(pt) + 1}"></td>
         <td th:text="${pt.getPerson().getFullName()}"></td>
         <td th:text="${pt.getPerson().getDateOfBirth().toString()}"></td>
-        <td th:text="${pt.getPerson().getAddress()}"></td>
+        <td sec:authorize="hasRole('ROLE_ADMIN')" th:text="${pt.getPerson().getAddress()}"></td>
         <td th:text="${pt.getPerson().getTelephoneNumber()}"></td>
         <td th:text="${pt.getPerson().getEmail()}"></td>
         <td th:text="${pt.getPerson().getSex().toString()}"></td>
-        <td th:text="${pt.getUser().getUsername()}"></td>
-        <td>
-            <a th:href="@{'/api/patient/delete/' + ${pt.getId()}}" style="text-decoration: none">
+        <td sec:authorize="hasRole('ROLE_ADMIN')" th:text="${pt.getUser().getUsername()}"></td>
+        <td sec:authorize="hasRole('ROLE_DOCTOR')">
+            <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{'/api/patient/delete/' + ${pt.getId()}}" style="text-decoration: none">
                 <button type="button" class="btn btn-outline-secondary">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
                          class="bi bi-trash-fill" viewBox="0 0 15 15">
@@ -83,11 +97,19 @@
                     </svg>
                 </button>
             </a>
-            <a th:href="@{'/ui/patient/update/' + ${pt.getId()}}" style="text-decoration: none">
+            <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{'/ui/patient/update/' + ${pt.getId()}}" style="text-decoration: none">
                 <button type="button" class="btn btn-outline-secondary">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
                          class="bi bi-pencil-fill" viewBox="0 0 16 16">
                         <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z"></path>
+                    </svg>
+                </button>
+            </a>
+            <a sec:authorize="!hasRole('ROLE_ADMIN') and hasRole('ROLE_DOCTOR')" th:href="@{'/ui/assignedProcedures/create/' + ${pt.getId()}}" style="text-decoration: none">
+                <button type="button" class="btn btn-outline-secondary">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-plus" viewBox="0 0 16 16">
+                        <path d="M8.5 6a.5.5 0 0 0-1 0v1.5H6a.5.5 0 0 0 0 1h1.5V10a.5.5 0 0 0 1 0V8.5H10a.5.5 0 0 0 0-1H8.5V6z"/>
+                        <path d="M2 2a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2zm10-1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1z"/>
                     </svg>
                 </button>
             </a>

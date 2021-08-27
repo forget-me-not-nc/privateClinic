@@ -19,7 +19,7 @@ public interface IGenericService<T>
 
 	void deleteById(String id);
 
-	T create(T user);
+	T create(T object);
 
-	T update(T user);
+	T update(T object);
 }

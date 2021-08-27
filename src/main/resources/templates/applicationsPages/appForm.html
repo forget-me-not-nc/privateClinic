@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Creation Form</title>
+    <title>Form</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
@@ -25,22 +25,40 @@
 <body>
 <div id="form-container">
     <form method="post">
-        <p class="fw-bolder ">Application creation form:</p>
+        <p class="fw-bolder ">Application form:</p>
         <div hidden class="input-group mb-3">
             <span class="input-group-text">Doctor id:</span>
-            <input type="text" th:value="${doctor.getId()}" id="doctorId" class="form-control" required name="id">
+            <input type="text" th:value="${doctor.getId()}" id="doctorId" class="form-control" name="doctorId">
+        </div>
+        <div class="input-group mb-3">
+            <span class="input-group-text">Doctor`s name:</span>
+            <input type="text" th:value="${doctor.getPerson().getFullName()}" class="form-control" disabled>
+        </div>
+        <div class="input-group mb-3">
+            <span class="input-group-text">Doctor`s specialty:</span>
+            <input type="text" th:value="${doctor.getSpecialty()}" class="form-control" disabled>
         </div>
         <div class="input-group mb-3">
             <span class="input-group-text">Select date:</span>
-            <input type="date" id="date" class="form-control" required name="date">
+            <input type="date" id="date" class="form-control" name="date" th:min="${#dates.format(#dates.createNow(), 'yyyy-MM-dd')}" required>
         </div>
         <div class="input-group mb-3">
             <span class="input-group-text">Select time:</span>
-            <select class="form-select form-select-sm" id="time">
-
-            </select>
+            <select class="form-select form-select-sm" id="time" name="time" required></select>
         </div>
-        <a style="text-decoration: none" href="/ui/application/showAll">
+        <div hidden class="input-group mb-3">
+            <span class="input-group-text">Patient id:</span>
+            <input type="text" th:value="${patient.getId()}" class="form-control" name="patientId">
+        </div>
+        <div class="input-group mb-3">
+            <span class="input-group-text">Patient`s name:</span>
+            <input type="text" th:value="${patient.getPerson().getFullName()}" class="form-control" disabled>
+        </div>
+        <div class="input-group mb-3">
+            <span class="input-group-text">Patient`s phone number:</span>
+            <input type="text" th:value="${patient.getPerson().getTelephoneNumber()}" class="form-control" disabled>
+        </div>
+        <a style="text-decoration: none" href="/main">
             <button type="button" class="btn btn-outline-secondary">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                      class="bi bi-chevron-double-left" viewBox="0 0 16 16">

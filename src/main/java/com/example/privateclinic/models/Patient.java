@@ -5,6 +5,8 @@ import lombok.Data;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.Objects;
+
 /**
  * Created by IntelliJ IDEA.
  * privateClinic.Patient
@@ -23,4 +25,19 @@ public class Patient
 	private Person person;
 	@DBRef
 	private User user;
+
+	@Override
+	public boolean equals(Object o)
+	{
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		Patient patient = (Patient) o;
+		return id.equals(patient.id);
+	}
+
+	@Override
+	public int hashCode()
+	{
+		return Objects.hash(id);
+	}
 }

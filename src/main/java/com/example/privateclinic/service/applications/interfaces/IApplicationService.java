@@ -1,6 +1,7 @@
 package com.example.privateclinic.service.applications.interfaces;
 
 import com.example.privateclinic.models.Application;
+import com.example.privateclinic.models.Doctor;
 import com.example.privateclinic.models.User;
 import com.example.privateclinic.service.IGenericService;
 
@@ -31,4 +32,6 @@ public interface IApplicationService extends IGenericService<Application>
 	List<Application> findPatientsApplications(User user);
 
 	List<Application> findAvailableTime(String id, LocalDateTime start, LocalDateTime end);
+
+	List<Application> findByDoctorId(String id);
 }

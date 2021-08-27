@@ -6,6 +6,7 @@ import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalTime;
+import java.util.Objects;
 
 /**
  * Created by IntelliJ IDEA.
@@ -28,4 +29,19 @@ public class Doctor
 	private LocalTime endHour;
 	@DBRef
 	private User user;
+
+	@Override
+	public boolean equals(Object o)
+	{
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+		Doctor doctor = (Doctor) o;
+		return id.equals(doctor.id);
+	}
+
+	@Override
+	public int hashCode()
+	{
+		return Objects.hash(id);
+	}
 }

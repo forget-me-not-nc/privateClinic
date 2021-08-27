@@ -1,6 +1,7 @@
 package com.example.privateclinic.service.applications.impls;
 
 import com.example.privateclinic.models.Application;
+import com.example.privateclinic.models.Doctor;
 import com.example.privateclinic.models.User;
 import com.example.privateclinic.repository.ApplicationRepository;
 import com.example.privateclinic.service.applications.interfaces.IApplicationService;
@@ -73,6 +74,12 @@ public class ApplicationServiceImpl implements IApplicationService
 	)
 	{
 		return applicationRepository.findAvailableTime(id, start, end);
+	}
+
+	@Override
+	public List<Application> findByDoctorId(String id)
+	{
+		return applicationRepository.findAllByDoctor_Id(id);
 	}
 
 
