@@ -80,12 +80,15 @@ public class ApplicationUIController
 	}
 
 	@GetMapping(value = "/create/{doctorId}")
-	public String create(@PathVariable String doctorId, Model model,
-						 @AuthenticationPrincipal CustomUserDetails userDetails)
+	public String create(
+			@PathVariable String doctorId, Model model,
+			@AuthenticationPrincipal CustomUserDetails userDetails
+	)
 	{
 		model.addAttribute("doctor", doctorService.getById(doctorId));
 		model.addAttribute("patient",
-				patientService.findByUser(userService.findUserByUsername(userDetails.getUsername()).get()
+				patientService.findByUser(userService.findUserByUsername(userDetails.getUsername())
+						.get()
 				).get());
 
 		return "applicationsPages/appForm";
@@ -93,10 +96,12 @@ public class ApplicationUIController
 
 	@PreAuthorize(value = "hasRole('ROLE_PATIENT') and !hasRole('ROLE_ADMIN')")
 	@PostMapping(value = "/create/{doctorId}")
-	public String create(@PathVariable String doctorId,
-						 @RequestParam("patientId") String patientId,
-						 @RequestParam("date") String date,
-						 @RequestParam("time") String time)
+	public String create(
+			@PathVariable String doctorId,
+			@RequestParam("patientId") String patientId,
+			@RequestParam("date") String date,
+			@RequestParam("time") String time
+	)
 	{
 
 		try
@@ -114,8 +119,7 @@ public class ApplicationUIController
 			applicationService.create(application);
 
 			return "redirect:/ui/application/showAll";
-		}
-		catch (Exception e)
+		} catch (Exception e)
 		{
 			throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Something went " +
 					"wrong");

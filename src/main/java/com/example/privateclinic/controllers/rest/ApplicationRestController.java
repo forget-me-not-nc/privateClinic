@@ -91,7 +91,7 @@ public class ApplicationRestController
 		List<Application> applications = applicationService.getAll();
 
 		applications.forEach(el -> {
-			if(el.getDate().isBefore(LocalDateTime.now().minusDays(30)))
+			if (el.getDate().isBefore(LocalDateTime.now().minusDays(30)))
 			{
 				applicationService.deleteById(el.getId());
 			}

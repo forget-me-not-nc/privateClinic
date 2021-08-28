@@ -106,11 +106,12 @@ public class CommonController
 	@RequestMapping(value = "/main")
 	public String mainPage(@AuthenticationPrincipal CustomUserDetails userDetails, Model model)
 	{
-		if (userDetails.getAuthorities().contains(new SimpleGrantedAuthority(Roles.ROLE_ADMIN.toString())))
+		if (userDetails.getAuthorities()
+				.contains(new SimpleGrantedAuthority(Roles.ROLE_ADMIN.toString())))
 		{
 			model.addAttribute("user", null);
-		}
-		else if (userDetails.getAuthorities().contains(new SimpleGrantedAuthority(Roles.ROLE_PATIENT.toString())))
+		} else if (userDetails.getAuthorities()
+				.contains(new SimpleGrantedAuthority(Roles.ROLE_PATIENT.toString())))
 		{
 			Optional<User> user = userService.findUserByUsername(userDetails.getUsername());
 
@@ -118,17 +119,15 @@ public class CommonController
 			{
 				Optional<Patient> patient = patientService.findByUser(user.get());
 
-				if(patient.isPresent())
+				if (patient.isPresent())
 				{
 					model.addAttribute("user", patient.get().getPerson());
 					model.addAttribute("id", patient.get().getId());
-				}
-				else throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR);
-			}
-			else throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR);
+				} else throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR);
+			} else throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR);
 
-		}
-		else if(userDetails.getAuthorities().contains(new SimpleGrantedAuthority(Roles.ROLE_DOCTOR.toString())))
+		} else if (userDetails.getAuthorities()
+				.contains(new SimpleGrantedAuthority(Roles.ROLE_DOCTOR.toString())))
 		{
 			Optional<User> user = userService.findUserByUsername(userDetails.getUsername());
 
@@ -136,17 +135,14 @@ public class CommonController
 			{
 				Optional<Doctor> doctor = doctorService.findByUser(user.get());
 
-				if(doctor.isPresent())
+				if (doctor.isPresent())
 				{
 					model.addAttribute("user", doctor.get().getPerson());
 					model.addAttribute("doctorInfo", doctor.get());
 					model.addAttribute("id", doctor.get().getId());
-				}
-				else throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR);
-			}
-			else throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR);
-		}
-		else throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+				} else throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR);
+			} else throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR);
+		} else throw new ResponseStatusException(HttpStatus.NOT_FOUND);
 
 		return "main-page";
 	}

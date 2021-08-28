@@ -42,7 +42,10 @@ public class ProcedureRestController
 	@GetMapping(value = "/getAllProcedures")
 	List<String> getAll()
 	{
-		return procedureService.getAll().stream().map(Procedure::getProcedureName).collect(Collectors.toList());
+		return procedureService.getAll()
+				.stream()
+				.map(Procedure::getProcedureName)
+				.collect(Collectors.toList());
 	}
 
 }

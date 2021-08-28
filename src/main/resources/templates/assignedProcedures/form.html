@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Form</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" rel="stylesheet">
     <style>
         #form-container {
             margin: 30px auto;
@@ -29,8 +29,8 @@
         <p class="fw-bolder">Procedure form:</p>
         <div class="input-group mb-3">
             <span class="input-group-text">Patient:</span>
-            <input th:value="${patient.getPerson().getFullName()}" class="form-control"
-                   type="text" disabled>
+            <input class="form-control" disabled
+                   th:value="${patient.getPerson().getFullName()}" type="text">
         </div>
         <div class="input-group mb-3">
             <span class="input-group-text">Procedure name:</span>
@@ -40,34 +40,34 @@
         </div>
         <div class="input-group mb-3">
             <span class="input-group-text">Date:</span>
-            <input type="date" class="form-control" required name="date">
+            <input class="form-control" name="date" required type="date">
         </div>
         <div class="input-group mb-3">
             <span class="input-group-text">Time:</span>
-            <input type="time" placeholder="h"
-                   id="time"
-                   class="form-control" name="time" min="05:00" max="23:00" required>
+            <input class="form-control" id="time"
+                   max="23:00"
+                   min="05:00" name="time" placeholder="h" required type="time">
         </div>
-        <a style="text-decoration: none" href="/main">
-            <button type="button" class="btn btn-outline-secondary">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                     class="bi bi-chevron-double-left" viewBox="0 0 16 16">
-                    <path fill-rule="evenodd"
-                          d="M8.354 1.646a.5.5 0 0 1 0 .708L2.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/>
-                    <path fill-rule="evenodd"
-                          d="M12.354 1.646a.5.5 0 0 1 0 .708L6.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/>
+        <a href="/main" style="text-decoration: none">
+            <button class="btn btn-outline-secondary" type="button">
+                <svg class="bi bi-chevron-double-left" fill="currentColor" height="16" viewBox="0 0 16 16"
+                     width="16" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M8.354 1.646a.5.5 0 0 1 0 .708L2.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"
+                          fill-rule="evenodd"/>
+                    <path d="M12.354 1.646a.5.5 0 0 1 0 .708L6.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"
+                          fill-rule="evenodd"/>
                 </svg>
                 Back
             </button>
         </a>
-        <button type="submit" class="btn btn-outline-secondary">
+        <button class="btn btn-outline-secondary" type="submit">
             Submit
-            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="19" fill="currentColor"
-                 class="bi bi-chevron-double-right" viewBox="0 0 12 19">
-                <path fill-rule="evenodd"
-                      d="M3.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L9.293 8 3.646 2.354a.5.5 0 0 1 0-.708z"></path>
-                <path fill-rule="evenodd"
-                      d="M7.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L13.293 8 7.646 2.354a.5.5 0 0 1 0-.708z"></path>
+            <svg class="bi bi-chevron-double-right" fill="currentColor" height="19" viewBox="0 0 12 19"
+                 width="18" xmlns="http://www.w3.org/2000/svg">
+                <path d="M3.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L9.293 8 3.646 2.354a.5.5 0 0 1 0-.708z"
+                      fill-rule="evenodd"></path>
+                <path d="M7.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L13.293 8 7.646 2.354a.5.5 0 0 1 0-.708z"
+                      fill-rule="evenodd"></path>
             </svg>
         </button>
     </form>

@@ -202,7 +202,8 @@ public class DoctorUIController
 			Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 			CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();
 
-			if (!userDetails.getAuthorities().contains(new SimpleGrantedAuthority(Roles.ROLE_ADMIN.toString())))
+			if (!userDetails.getAuthorities()
+					.contains(new SimpleGrantedAuthority(Roles.ROLE_ADMIN.toString())))
 			{
 				userDetails.setUsername(username);
 				userDetails.setPassword(new BCryptPasswordEncoder().encode(password));

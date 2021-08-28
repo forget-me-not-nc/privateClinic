@@ -50,17 +50,17 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter
 						"/api/doctor/isEmailValid/**",
 						"/api/doctor/isPhoneValid/**",
 						"/api/application/getAvailableTime/**").permitAll()
-					.anyRequest().authenticated()
+				.anyRequest().authenticated()
 				.and()
-					.formLogin()
-					.loginPage("/login")
-					.defaultSuccessUrl("/main", true)
+				.formLogin()
+				.loginPage("/login")
+				.defaultSuccessUrl("/main", true)
 				.and()
-					.logout()
-					.logoutUrl("/logout")
-					.invalidateHttpSession(true)
-					.deleteCookies("JSESSIONID")
-					.logoutSuccessUrl("/login");
+				.logout()
+				.logoutUrl("/logout")
+				.invalidateHttpSession(true)
+				.deleteCookies("JSESSIONID")
+				.logoutSuccessUrl("/login");
 	}
 
 	@Override

@@ -1,7 +1,6 @@
 package com.example.privateclinic.service.applications.interfaces;
 
 import com.example.privateclinic.models.Application;
-import com.example.privateclinic.models.Doctor;
 import com.example.privateclinic.models.User;
 import com.example.privateclinic.service.IGenericService;
 

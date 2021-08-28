@@ -1,6 +1,5 @@
 package com.example.privateclinic.controllers.rest;
 
-import com.example.privateclinic.models.Application;
 import com.example.privateclinic.models.AssignedProcedure;
 import com.example.privateclinic.service.assignedProcedures.impls.AssignedProcedureServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +32,7 @@ public class AssignedProceduresRestController
 		List<AssignedProcedure> applications = assignedProcedureService.getAll();
 
 		applications.forEach(el -> {
-			if(el.getDate().isBefore(LocalDateTime.now().minusDays(15)))
+			if (el.getDate().isBefore(LocalDateTime.now().minusDays(15)))
 			{
 				assignedProcedureService.deleteById(el.getId());
 			}

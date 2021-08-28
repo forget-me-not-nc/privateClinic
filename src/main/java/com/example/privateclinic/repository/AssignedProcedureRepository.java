@@ -1,7 +1,6 @@
 package com.example.privateclinic.repository;
 
 import com.example.privateclinic.models.AssignedProcedure;
-import com.example.privateclinic.models.Patient;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 

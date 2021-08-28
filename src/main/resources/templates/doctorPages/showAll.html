@@ -1,18 +1,17 @@
 <!DOCTYPE html>
-<html lang="eng" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<html lang="eng" xmlns:sec="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Site page</title>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" rel="stylesheet">
     <style>
-        body
-        {
+        body {
             background-color: rgb(206, 210, 236);
         }
 
-        .info-block > input
-        {
+        .info-block > input {
             outline: none;
             box-shadow: none;
             border-radius: 10px;
@@ -32,107 +31,108 @@
 <nav class="py-2 bg-dark border-bottom">
     <div class="container d-flex flex-wrap">
         <ul class="nav me-auto">
-            <li class="nav-item"><a href="/main" class="nav-link link-light px-2" aria-current="page">Home</a></li>
-            <li class="nav-item"><a href="/ui/doctor/showAll" class="nav-link link-light px-2 active"
-                                    aria-current="page">Doctors
+            <li class="nav-item"><a aria-current="page" class="nav-link link-light px-2" href="/main">Home</a></li>
+            <li class="nav-item"><a aria-current="page" class="nav-link link-light px-2 active"
+                                    href="/ui/doctor/showAll">Doctors
                 <span class="sr-only">(current)</span></a>
             </li>
-            <li sec:authorize="hasRole('ROLE_ADMIN')" class="nav-item">
-                <a href="/ui/patient/showAll" class="nav-link link-light px-2" aria-current="page">Patients</span></a>
+            <li class="nav-item" sec:authorize="hasRole('ROLE_ADMIN')">
+                <a aria-current="page" class="nav-link link-light px-2" href="/ui/patient/showAll">Patients</span></a>
             </li>
-            <li class="nav-item"><a href="/ui/application/showAll" class="nav-link link-light px-2">Applications</a>
+            <li class="nav-item"><a class="nav-link link-light px-2" href="/ui/application/showAll">Applications</a>
             </li>
-            <li sec:authorize="hasRole('ROLE_ADMIN')" class="nav-item">
-                <a href="/ui/procedures/showAll" class="nav-link link-light px-2" aria-current="page">Procedures</a>
+            <li class="nav-item" sec:authorize="hasRole('ROLE_ADMIN')">
+                <a aria-current="page" class="nav-link link-light px-2" href="/ui/procedures/showAll">Procedures</a>
             </li>
-            <li sec:authorize="hasRole('ROLE_DOCTOR') and !hasRole('ROLE_ADMIN')" class="nav-item">
-                <a href="/ui/patient/showAll" class="nav-link link-light px-2" aria-current="page">My Patients</a>
+            <li class="nav-item" sec:authorize="hasRole('ROLE_DOCTOR') and !hasRole('ROLE_ADMIN')">
+                <a aria-current="page" class="nav-link link-light px-2" href="/ui/patient/showAll">My Patients</a>
             </li>
-            <li sec:authorize="hasRole('ROLE_PATIENT') and !hasRole('ROLE_ADMIN')" class="nav-item">
-                <a href="/ui/assignedProcedures/showAll" class="nav-link link-light px-2" aria-current="page">My procedures</a>
+            <li class="nav-item" sec:authorize="hasRole('ROLE_PATIENT') and !hasRole('ROLE_ADMIN')">
+                <a aria-current="page" class="nav-link link-light px-2" href="/ui/assignedProcedures/showAll">My
+                    procedures</a>
             </li>
         </ul>
         <ul class="nav">
-            <li class="nav-item"><input style="position: relative; top: 8px; height: 25px;" type="text"
-                                        th:value="${#authentication.name}" disabled></li>
-            <li class="nav-item"><a href="/logout" class="nav-link link-light px-2">Logout</a></li>
+            <li class="nav-item"><input disabled style="position: relative; top: 8px; height: 25px;"
+                                        th:value="${#authentication.name}" type="text"></li>
+            <li class="nav-item"><a class="nav-link link-light px-2" href="/logout">Logout</a></li>
         </ul>
     </div>
 </nav>
 
 <div class="table-responsive mb-5" style="width: max-content; margin: 15px auto auto;">
-<!-- table -->
-<table class="table" style="width: max-content; margin: 40px auto; background-color: white">
-    <caption>List</caption>
-    <thead class="table-dark">
-    <tr style="text-align: center">
-        <th scope="col" style="width: 30px;">#</th>
-        <th scope="col" style="width: 150px;">Full name</th>
-        <th scope="col" style="width: 230px;">Date of birth</th>
-        <th scope="col" style="width: 200px;">Address</th>
-        <th scope="col" style="width: 120px;">Phone</th>
-        <th scope="col" style="width: 290px;">Email</th>
-        <th scope="col" style="width: 70px;">Gender</th>
-        <th scope="col" style="width: 100px">Specialty</th>
-        <th scope="col" style="width: 100px">Work hours</th>
-        <th sec:authorize="hasRole('ROLE_ADMIN')" scope="col" style="width: 100px">Username</th>
-        <th sec:authorize="hasRole('ROLE_ADMIN')" scope="col" style="min-width: 80px;">Actions</th>
-        <th sec:authorize="hasRole('ROLE_PATIENT') && !hasRole('ROLE_ADMIN')" scope="col" style="max-width: 100px;">
-            Create application
-        </th>
-    </tr>
-    </thead>
-    <tbody style="border: solid 1px black">
-    <tr th:each="dc : ${doctors}">
-        <td th:text="${doctors.indexOf(dc) + 1}"></td>
-        <td th:text="${dc.getPerson().getFullName()}"></td>
-        <td th:text="${dc.getPerson().getDateOfBirth().toString()}"></td>
-        <td th:text="${dc.getPerson().getAddress()}"></td>
-        <td th:text="${dc.getPerson().getTelephoneNumber()}"></td>
-        <td th:text="${dc.getPerson().getEmail()}"></td>
-        <td th:text="${dc.getPerson().getSex().toString()}"></td>
-        <td th:text="${dc.getSpecialty()}"></td>
-        <td th:text="${#temporals.format(dc.getStartHour(), 'HH:mm')} + '-' + ${#temporals.format(dc.getEndHour(), 'HH:mm')}"></td>
-        <td sec:authorize="hasRole('ROLE_ADMIN')" th:text="${dc.getUser().getUsername()}"></td>
-        <td sec:authorize="hasRole('ROLE_ADMIN')">
-            <a th:href="@{'/api/doctor/delete/' + ${dc.getId()}}" style="text-decoration: none">
-                <button type="button" class="btn btn-outline-secondary">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
-                         class="bi bi-trash-fill" viewBox="0 0 15 15">
-                        <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"></path>
-                    </svg>
-                </button>
-            </a>
-            <a th:href="@{'/ui/doctor/update/' + ${dc.getId()}}" style="text-decoration: none">
-                <button type="button" class="btn btn-outline-secondary">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
-                         class="bi bi-pencil-fill" viewBox="0 0 16 16">
-                        <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z"></path>
-                    </svg>
-                </button>
-            </a>
-        </td>
-        <td sec:authorize="hasRole('ROLE_PATIENT') && !hasRole('ROLE_ADMIN')">
-            <a th:href="@{'/ui/application/create/' + ${dc.getId()}}" style="text-decoration: none;">
-                <button type="button" class="btn btn-outline-secondary">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                         class="bi bi-plus-square" viewBox="0 0 16 16">
-                        <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
-                        <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
-                    </svg>
-                </button>
-            </a>
-        </td>
-    </tr>
-    </tbody>
-</table>
+    <!-- table -->
+    <table class="table" style="width: max-content; margin: 40px auto; background-color: white">
+        <caption>List</caption>
+        <thead class="table-dark">
+        <tr style="text-align: center">
+            <th scope="col" style="width: 30px;">#</th>
+            <th scope="col" style="width: 150px;">Full name</th>
+            <th scope="col" style="width: 230px;">Date of birth</th>
+            <th scope="col" style="width: 200px;">Address</th>
+            <th scope="col" style="width: 120px;">Phone</th>
+            <th scope="col" style="width: 290px;">Email</th>
+            <th scope="col" style="width: 70px;">Gender</th>
+            <th scope="col" style="width: 100px">Specialty</th>
+            <th scope="col" style="width: 100px">Work hours</th>
+            <th scope="col" sec:authorize="hasRole('ROLE_ADMIN')" style="width: 100px">Username</th>
+            <th scope="col" sec:authorize="hasRole('ROLE_ADMIN')" style="min-width: 80px;">Actions</th>
+            <th scope="col" sec:authorize="hasRole('ROLE_PATIENT') && !hasRole('ROLE_ADMIN')" style="max-width: 100px;">
+                Create application
+            </th>
+        </tr>
+        </thead>
+        <tbody style="border: solid 1px black">
+        <tr th:each="dc : ${doctors}">
+            <td th:text="${doctors.indexOf(dc) + 1}"></td>
+            <td th:text="${dc.getPerson().getFullName()}"></td>
+            <td th:text="${dc.getPerson().getDateOfBirth().toString()}"></td>
+            <td th:text="${dc.getPerson().getAddress()}"></td>
+            <td th:text="${dc.getPerson().getTelephoneNumber()}"></td>
+            <td th:text="${dc.getPerson().getEmail()}"></td>
+            <td th:text="${dc.getPerson().getSex().toString()}"></td>
+            <td th:text="${dc.getSpecialty()}"></td>
+            <td th:text="${#temporals.format(dc.getStartHour(), 'HH:mm')} + '-' + ${#temporals.format(dc.getEndHour(), 'HH:mm')}"></td>
+            <td sec:authorize="hasRole('ROLE_ADMIN')" th:text="${dc.getUser().getUsername()}"></td>
+            <td sec:authorize="hasRole('ROLE_ADMIN')">
+                <a style="text-decoration: none" th:href="@{'/api/doctor/delete/' + ${dc.getId()}}">
+                    <button class="btn btn-outline-secondary" type="button">
+                        <svg class="bi bi-trash-fill" fill="currentColor" height="20" viewBox="0 0 15 15"
+                             width="20" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"></path>
+                        </svg>
+                    </button>
+                </a>
+                <a style="text-decoration: none" th:href="@{'/ui/doctor/update/' + ${dc.getId()}}">
+                    <button class="btn btn-outline-secondary" type="button">
+                        <svg class="bi bi-pencil-fill" fill="currentColor" height="20" viewBox="0 0 16 16"
+                             width="20" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708l-3-3zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207l6.5-6.5zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.499.499 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11l.178-.178z"></path>
+                        </svg>
+                    </button>
+                </a>
+            </td>
+            <td sec:authorize="hasRole('ROLE_PATIENT') && !hasRole('ROLE_ADMIN')">
+                <a style="text-decoration: none;" th:href="@{'/ui/application/create/' + ${dc.getId()}}">
+                    <button class="btn btn-outline-secondary" type="button">
+                        <svg class="bi bi-plus-square" fill="currentColor" height="16" viewBox="0 0 16 16"
+                             width="16" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
+                            <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+                        </svg>
+                    </button>
+                </a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
 
     <!--"Add new" button-->
-    <div sec:authorize="hasRole('ROLE_ADMIN')" class="btn-group mb-4" style="width:max-content;margin-left: 5px;">
+    <div class="btn-group mb-4" sec:authorize="hasRole('ROLE_ADMIN')" style="width:max-content;margin-left: 5px;">
         <a href="/ui/doctor/create">
-            <button type="button" class="btn btn btn-secondary">
-                <svg xmlns="http://www.w3.org/2000/svg" width="29" height="29" fill="currentColor"
-                     class="bi bi-plus-square-fill" viewBox="0 0 19 19">
+            <button class="btn btn btn-secondary" type="button">
+                <svg class="bi bi-plus-square-fill" fill="currentColor" height="29" viewBox="0 0 19 19"
+                     width="29" xmlns="http://www.w3.org/2000/svg">
                     <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2zm6.5 4.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3a.5.5 0 0 1 1 0z"></path>
                 </svg>
                 <span>Add new Doctor</span>

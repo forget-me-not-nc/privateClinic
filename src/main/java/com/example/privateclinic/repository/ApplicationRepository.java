@@ -1,7 +1,6 @@
 package com.example.privateclinic.repository;
 
 import com.example.privateclinic.models.Application;
-import com.example.privateclinic.models.Doctor;
 import com.example.privateclinic.models.User;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Query;

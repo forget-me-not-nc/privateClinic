@@ -57,11 +57,11 @@ public class PatientUIController
 	@RequestMapping(value = "/showAll")
 	public String showPatients(Model model, @AuthenticationPrincipal CustomUserDetails userDetails)
 	{
-		if(userDetails.getAuthorities().contains(new SimpleGrantedAuthority(Roles.ROLE_ADMIN.toString())))
+		if (userDetails.getAuthorities()
+				.contains(new SimpleGrantedAuthority(Roles.ROLE_ADMIN.toString())))
 		{
 			model.addAttribute("patients", patientService.getAll());
-		}
-		else
+		} else
 		{
 			List<Patient> patients = new ArrayList<>();
 
@@ -73,7 +73,8 @@ public class PatientUIController
 
 			applications.forEach(el -> patients.add(el.getPatient()));
 
-			model.addAttribute("patients", patients.stream().distinct().collect(Collectors.toList()));
+			model.addAttribute("patients",
+					patients.stream().distinct().collect(Collectors.toList()));
 		}
 
 		return "patientPages/showAll";
@@ -215,7 +216,8 @@ public class PatientUIController
 			Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 			CustomUserDetails userDetails = (CustomUserDetails) authentication.getPrincipal();
 
-			if (!userDetails.getAuthorities().contains(new SimpleGrantedAuthority(Roles.ROLE_ADMIN.toString())))
+			if (!userDetails.getAuthorities()
+					.contains(new SimpleGrantedAuthority(Roles.ROLE_ADMIN.toString())))
 			{
 				userDetails.setUsername(username);
 				userDetails.setPassword(new BCryptPasswordEncoder().encode(password));

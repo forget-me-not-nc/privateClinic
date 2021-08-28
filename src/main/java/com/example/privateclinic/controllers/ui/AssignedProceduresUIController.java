@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 /**
@@ -58,7 +57,8 @@ public class AssignedProceduresUIController
 				userService.findUserByUsername(customUserDetails.getUsername()).get()
 		).get();
 
-		model.addAttribute("procedures", assignedProcedureService.findAllForPatient(patient.getId()));
+		model.addAttribute("procedures",
+				assignedProcedureService.findAllForPatient(patient.getId()));
 
 		return "assignedProcedures/showAll";
 	}
@@ -78,7 +78,8 @@ public class AssignedProceduresUIController
 			@PathVariable String patientId,
 			@RequestParam("procedureName") String name,
 			@RequestParam("date") String date,
-			@RequestParam("time") String time)
+			@RequestParam("time") String time
+	)
 	{
 		try
 		{
@@ -94,8 +95,7 @@ public class AssignedProceduresUIController
 					.build();
 
 			assignedProcedureService.create(assignedProcedure);
-		}
-		catch (Exception e)
+		} catch (Exception e)
 		{
 			throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Something went " +
 					"wrong");

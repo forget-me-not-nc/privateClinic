@@ -2,8 +2,8 @@
 <html lang="en">
 <head xmlns="http://www.w3.org/1999/xhtml">
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
     <title>Register</title>
     <style>
         /* Reset CSS */
@@ -24,6 +24,7 @@
             vertical-align: baseline;
             background: transparent;
         }
+
         body {
             background: #DCDDDF url(https://cssdeck.com/uploads/media/items/7/7AF2Qzt.png);
             color: #000;
@@ -32,21 +33,69 @@
             padding: 0;
             position: relative;
         }
-        h1{ font-size:28px;}
-        h2{ font-size:26px;}
-        h3{ font-size:18px;}
-        h4{ font-size:16px;}
-        h5{ font-size:14px;}
-        h6{ font-size:12px;}
-        h1,h2,h3,h4,h5,h6{ color:#563D64;}
-        small{ font-size:10px;}
-        b, strong{ font-weight:bold;}
-        a{ text-decoration: none; }
-        a:hover{ text-decoration: underline; }
-        .left { float:left; }
-        .right { float:right; }
-        .alignleft { float: left; margin-right: 15px; }
-        .alignright { float: right; margin-left: 15px; }
+
+        h1 {
+            font-size: 28px;
+        }
+
+        h2 {
+            font-size: 26px;
+        }
+
+        h3 {
+            font-size: 18px;
+        }
+
+        h4 {
+            font-size: 16px;
+        }
+
+        h5 {
+            font-size: 14px;
+        }
+
+        h6 {
+            font-size: 12px;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            color: #563D64;
+        }
+
+        small {
+            font-size: 10px;
+        }
+
+        b, strong {
+            font-weight: bold;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .left {
+            float: left;
+        }
+
+        .right {
+            float: right;
+        }
+
+        .alignleft {
+            float: left;
+            margin-right: 15px;
+        }
+
+        .alignright {
+            float: right;
+            margin-left: 15px;
+        }
+
         .clearfix:after,
         form:after {
             content: ".";
@@ -55,14 +104,20 @@
             clear: both;
             visibility: hidden;
         }
-        .container { margin: 25px auto; position: relative; width: 900px; }
+
+        .container {
+            margin: 25px auto;
+            position: relative;
+            width: 900px;
+        }
+
         #content {
             background: #f9f9f9;
-            background: -moz-linear-gradient(top,  rgba(248,248,248,1) 0%, rgba(249,249,249,1) 100%);
-            background: -webkit-linear-gradient(top,  rgba(248,248,248,1) 0%,rgba(249,249,249,1) 100%);
-            background: -o-linear-gradient(top,  rgba(248,248,248,1) 0%,rgba(249,249,249,1) 100%);
-            background: -ms-linear-gradient(top,  rgba(248,248,248,1) 0%,rgba(249,249,249,1) 100%);
-            background: linear-gradient(top,  rgba(248,248,248,1) 0%,rgba(249,249,249,1) 100%);
+            background: -moz-linear-gradient(top, rgba(248, 248, 248, 1) 0%, rgba(249, 249, 249, 1) 100%);
+            background: -webkit-linear-gradient(top, rgba(248, 248, 248, 1) 0%, rgba(249, 249, 249, 1) 100%);
+            background: -o-linear-gradient(top, rgba(248, 248, 248, 1) 0%, rgba(249, 249, 249, 1) 100%);
+            background: -ms-linear-gradient(top, rgba(248, 248, 248, 1) 0%, rgba(249, 249, 249, 1) 100%);
+            background: linear-gradient(top, rgba(248, 248, 248, 1) 0%, rgba(249, 249, 249, 1) 100%);
             -webkit-box-shadow: 0 1px 0 #fff inset;
             -moz-box-shadow: 0 1px 0 #fff inset;
             -ms-box-shadow: 0 1px 0 #fff inset;
@@ -76,6 +131,7 @@
             text-shadow: 0 1px 0 #fff;
             width: 400px;
         }
+
         #content h1 {
             color: #7E7E7E;
             font: bold 25px Helvetica, Arial, sans-serif;
@@ -83,6 +139,7 @@
             line-height: 20px;
             margin: 10px 0 30px;
         }
+
         #content h1:before,
         #content h1:after {
             content: "";
@@ -91,32 +148,35 @@
             top: 10px;
             width: 27%;
         }
+
         #content h1:after {
-            background: rgb(126,126,126);
-            background: -moz-linear-gradient(left,  rgba(126,126,126,1) 0%, rgba(255,255,255,1) 100%);
-            background: -webkit-linear-gradient(left,  rgba(126,126,126,1) 0%,rgba(255,255,255,1) 100%);
-            background: -o-linear-gradient(left,  rgba(126,126,126,1) 0%,rgba(255,255,255,1) 100%);
-            background: -ms-linear-gradient(left,  rgba(126,126,126,1) 0%,rgba(255,255,255,1) 100%);
-            background: linear-gradient(left,  rgba(126,126,126,1) 0%,rgba(255,255,255,1) 100%);
+            background: rgb(126, 126, 126);
+            background: -moz-linear-gradient(left, rgba(126, 126, 126, 1) 0%, rgba(255, 255, 255, 1) 100%);
+            background: -webkit-linear-gradient(left, rgba(126, 126, 126, 1) 0%, rgba(255, 255, 255, 1) 100%);
+            background: -o-linear-gradient(left, rgba(126, 126, 126, 1) 0%, rgba(255, 255, 255, 1) 100%);
+            background: -ms-linear-gradient(left, rgba(126, 126, 126, 1) 0%, rgba(255, 255, 255, 1) 100%);
+            background: linear-gradient(left, rgba(126, 126, 126, 1) 0%, rgba(255, 255, 255, 1) 100%);
             right: 0;
         }
+
         #content h1:before {
-            background: rgb(126,126,126);
-            background: -moz-linear-gradient(right,  rgba(126,126,126,1) 0%, rgba(255,255,255,1) 100%);
-            background: -webkit-linear-gradient(right,  rgba(126,126,126,1) 0%,rgba(255,255,255,1) 100%);
-            background: -o-linear-gradient(right,  rgba(126,126,126,1) 0%,rgba(255,255,255,1) 100%);
-            background: -ms-linear-gradient(right,  rgba(126,126,126,1) 0%,rgba(255,255,255,1) 100%);
-            background: linear-gradient(right,  rgba(126,126,126,1) 0%,rgba(255,255,255,1) 100%);
+            background: rgb(126, 126, 126);
+            background: -moz-linear-gradient(right, rgba(126, 126, 126, 1) 0%, rgba(255, 255, 255, 1) 100%);
+            background: -webkit-linear-gradient(right, rgba(126, 126, 126, 1) 0%, rgba(255, 255, 255, 1) 100%);
+            background: -o-linear-gradient(right, rgba(126, 126, 126, 1) 0%, rgba(255, 255, 255, 1) 100%);
+            background: -ms-linear-gradient(right, rgba(126, 126, 126, 1) 0%, rgba(255, 255, 255, 1) 100%);
+            background: linear-gradient(right, rgba(126, 126, 126, 1) 0%, rgba(255, 255, 255, 1) 100%);
             left: 0;
         }
+
         #content:after,
         #content:before {
             background: #f9f9f9;
-            background: -moz-linear-gradient(top,  rgba(248,248,248,1) 0%, rgba(249,249,249,1) 100%);
-            background: -webkit-linear-gradient(top,  rgba(248,248,248,1) 0%,rgba(249,249,249,1) 100%);
-            background: -o-linear-gradient(top,  rgba(248,248,248,1) 0%,rgba(249,249,249,1) 100%);
-            background: -ms-linear-gradient(top,  rgba(248,248,248,1) 0%,rgba(249,249,249,1) 100%);
-            background: linear-gradient(top,  rgba(248,248,248,1) 0%,rgba(249,249,249,1) 100%);
+            background: -moz-linear-gradient(top, rgba(248, 248, 248, 1) 0%, rgba(249, 249, 249, 1) 100%);
+            background: -webkit-linear-gradient(top, rgba(248, 248, 248, 1) 0%, rgba(249, 249, 249, 1) 100%);
+            background: -o-linear-gradient(top, rgba(248, 248, 248, 1) 0%, rgba(249, 249, 249, 1) 100%);
+            background: -ms-linear-gradient(top, rgba(248, 248, 248, 1) 0%, rgba(249, 249, 249, 1) 100%);
+            background: linear-gradient(top, rgba(248, 248, 248, 1) 0%, rgba(249, 249, 249, 1) 100%);
             border: 1px solid #c4c6ca;
             content: "";
             display: block;
@@ -125,6 +185,7 @@
             position: absolute;
             width: 100%;
         }
+
         #content:after {
             -webkit-transform: rotate(2deg);
             -moz-transform: rotate(2deg);
@@ -134,6 +195,7 @@
             top: 0;
             z-index: -1;
         }
+
         #content:before {
             -webkit-transform: rotate(-3deg);
             -moz-transform: rotate(-3deg);
@@ -143,7 +205,12 @@
             top: 0;
             z-index: -2;
         }
-        #content form { margin: 0 20px; position: relative }
+
+        #content form {
+            margin: 0 20px;
+            position: relative
+        }
+
         #content form input[type="text"],
         #content form input[type="password"] {
             -webkit-border-radius: 3px;
@@ -151,11 +218,11 @@
             -ms-border-radius: 3px;
             -o-border-radius: 3px;
             border-radius: 3px;
-            -webkit-box-shadow: 0 1px 0 #fff, 0 -2px 5px rgba(0,0,0,0.08) inset;
-            -moz-box-shadow: 0 1px 0 #fff, 0 -2px 5px rgba(0,0,0,0.08) inset;
-            -ms-box-shadow: 0 1px 0 #fff, 0 -2px 5px rgba(0,0,0,0.08) inset;
-            -o-box-shadow: 0 1px 0 #fff, 0 -2px 5px rgba(0,0,0,0.08) inset;
-            box-shadow: 0 1px 0 #fff, 0 -2px 5px rgba(0,0,0,0.08) inset;
+            -webkit-box-shadow: 0 1px 0 #fff, 0 -2px 5px rgba(0, 0, 0, 0.08) inset;
+            -moz-box-shadow: 0 1px 0 #fff, 0 -2px 5px rgba(0, 0, 0, 0.08) inset;
+            -ms-box-shadow: 0 1px 0 #fff, 0 -2px 5px rgba(0, 0, 0, 0.08) inset;
+            -o-box-shadow: 0 1px 0 #fff, 0 -2px 5px rgba(0, 0, 0, 0.08) inset;
+            box-shadow: 0 1px 0 #fff, 0 -2px 5px rgba(0, 0, 0, 0.08) inset;
             -webkit-transition: all 0.5s ease;
             -moz-transition: all 0.5s ease;
             -ms-transition: all 0.5s ease;
@@ -168,6 +235,7 @@
             padding: 15px 10px 15px 40px;
             width: 80%;
         }
+
         #content form input[type="text"]:focus,
         #content form input[type="password"]:focus {
             -webkit-box-shadow: 0 0 2px #2649c4 inset;
@@ -179,25 +247,32 @@
             border: 1px solid #2649c4;
             outline: none;
         }
-        #username { background-position: 10px 10px !important }
-        #password { background-position: 10px -53px !important }
+
+        #username {
+            background-position: 10px 10px !important
+        }
+
+        #password {
+            background-position: 10px -53px !important
+        }
+
         #content form input[type="submit"] {
-            background: rgb(254,231,154);
-            background: -moz-linear-gradient(top,  rgba(254,231,154,1) 0%, rgba(254,193,81,1) 100%);
-            background: -webkit-linear-gradient(top,  rgba(254,231,154,1) 0%,rgba(254,193,81,1) 100%);
-            background: -o-linear-gradient(top,  rgba(254,231,154,1) 0%,rgba(254,193,81,1) 100%);
-            background: -ms-linear-gradient(top,  rgba(254,231,154,1) 0%,rgba(254,193,81,1) 100%);
-            background: linear-gradient(top,  rgba(254,231,154,1) 0%,rgba(254,193,81,1) 100%);
+            background: rgb(254, 231, 154);
+            background: -moz-linear-gradient(top, rgba(254, 231, 154, 1) 0%, rgba(254, 193, 81, 1) 100%);
+            background: -webkit-linear-gradient(top, rgba(254, 231, 154, 1) 0%, rgba(254, 193, 81, 1) 100%);
+            background: -o-linear-gradient(top, rgba(254, 231, 154, 1) 0%, rgba(254, 193, 81, 1) 100%);
+            background: -ms-linear-gradient(top, rgba(254, 231, 154, 1) 0%, rgba(254, 193, 81, 1) 100%);
+            background: linear-gradient(top, rgba(254, 231, 154, 1) 0%, rgba(254, 193, 81, 1) 100%);
             -webkit-border-radius: 30px;
             -moz-border-radius: 30px;
             -ms-border-radius: 30px;
             -o-border-radius: 30px;
             border-radius: 30px;
-            -webkit-box-shadow: 0 1px 0 rgba(255,255,255,0.8) inset;
-            -moz-box-shadow: 0 1px 0 rgba(255,255,255,0.8) inset;
-            -ms-box-shadow: 0 1px 0 rgba(255,255,255,0.8) inset;
-            -o-box-shadow: 0 1px 0 rgba(255,255,255,0.8) inset;
-            box-shadow: 0 1px 0 rgba(255,255,255,0.8) inset;
+            -webkit-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.8) inset;
+            -moz-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.8) inset;
+            -ms-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.8) inset;
+            -o-box-shadow: 0 1px 0 rgba(255, 255, 255, 0.8) inset;
+            box-shadow: 0 1px 0 rgba(255, 255, 255, 0.8) inset;
             border: 1px solid #D69E31;
             color: #85592e;
             cursor: pointer;
@@ -206,17 +281,19 @@
             height: 35px;
             margin: 20px 0 35px 15px;
             position: relative;
-            text-shadow: 0 1px 0 rgba(255,255,255,0.5);
+            text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
             width: 120px;
         }
+
         #content form input[type="submit"]:hover {
-            background: rgb(254,193,81);
-            background: -moz-linear-gradient(top,  rgba(254,193,81,1) 0%, rgba(254,231,154,1) 100%);
-            background: -webkit-linear-gradient(top,  rgba(254,193,81,1) 0%,rgba(254,231,154,1) 100%);
-            background: -o-linear-gradient(top,  rgba(254,193,81,1) 0%,rgba(254,231,154,1) 100%);
-            background: -ms-linear-gradient(top,  rgba(254,193,81,1) 0%,rgba(254,231,154,1) 100%);
-            background: linear-gradient(top,  rgba(254,193,81,1) 0%,rgba(254,231,154,1) 100%);
+            background: rgb(254, 193, 81);
+            background: -moz-linear-gradient(top, rgba(254, 193, 81, 1) 0%, rgba(254, 231, 154, 1) 100%);
+            background: -webkit-linear-gradient(top, rgba(254, 193, 81, 1) 0%, rgba(254, 231, 154, 1) 100%);
+            background: -o-linear-gradient(top, rgba(254, 193, 81, 1) 0%, rgba(254, 231, 154, 1) 100%);
+            background: -ms-linear-gradient(top, rgba(254, 193, 81, 1) 0%, rgba(254, 231, 154, 1) 100%);
+            background: linear-gradient(top, rgba(254, 193, 81, 1) 0%, rgba(254, 231, 154, 1) 100%);
         }
+
         #content form div a {
             color: #004a80;
             float: right;
@@ -224,18 +301,19 @@
             margin: 30px 15px 0 0;
             text-decoration: underline;
         }
+
         .button {
-            background: rgb(247,249,250);
-            background: -moz-linear-gradient(top,  rgba(247,249,250,1) 0%, rgba(240,240,240,1) 100%);
-            background: -webkit-linear-gradient(top,  rgba(247,249,250,1) 0%,rgba(240,240,240,1) 100%);
-            background: -o-linear-gradient(top,  rgba(247,249,250,1) 0%,rgba(240,240,240,1) 100%);
-            background: -ms-linear-gradient(top,  rgba(247,249,250,1) 0%,rgba(240,240,240,1) 100%);
-            background: linear-gradient(top,  rgba(247,249,250,1) 0%,rgba(240,240,240,1) 100%);
-            -webkit-box-shadow: 0 1px 2px rgba(0,0,0,0.1) inset;
-            -moz-box-shadow: 0 1px 2px rgba(0,0,0,0.1) inset;
-            -ms-box-shadow: 0 1px 2px rgba(0,0,0,0.1) inset;
-            -o-box-shadow: 0 1px 2px rgba(0,0,0,0.1) inset;
-            box-shadow: 0 1px 2px rgba(0,0,0,0.1) inset;
+            background: rgb(247, 249, 250);
+            background: -moz-linear-gradient(top, rgba(247, 249, 250, 1) 0%, rgba(240, 240, 240, 1) 100%);
+            background: -webkit-linear-gradient(top, rgba(247, 249, 250, 1) 0%, rgba(240, 240, 240, 1) 100%);
+            background: -o-linear-gradient(top, rgba(247, 249, 250, 1) 0%, rgba(240, 240, 240, 1) 100%);
+            background: -ms-linear-gradient(top, rgba(247, 249, 250, 1) 0%, rgba(240, 240, 240, 1) 100%);
+            background: linear-gradient(top, rgba(247, 249, 250, 1) 0%, rgba(240, 240, 240, 1) 100%);
+            -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1) inset;
+            -moz-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1) inset;
+            -ms-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1) inset;
+            -o-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1) inset;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1) inset;
             -webkit-border-radius: 0 0 5px 5px;
             -moz-border-radius: 0 0 5px 5px;
             -o-border-radius: 0 0 5px 5px;
@@ -244,6 +322,7 @@
             border-top: 1px solid #CFD5D9;
             padding: 15px 0;
         }
+
         .button a {
             color: #7E7E7E;
             font-size: 17px;
@@ -255,6 +334,7 @@
             -o-transition: all 0.3s ease;
             transition: all 0.3s ease;
         }
+
         .button a:hover {
             background-position: 0 -135px;
             color: #00aeef;
@@ -263,50 +343,51 @@
 </head>
 <body>
 <div class="container">
-<section id="content">
-    <form action="/registration" method="post">
-        <h1>Registration Form</h1>
-        <div>
-            <input type="text" placeholder="Full name" required="" id="pd" pattern="[a-zA-Z'-'\s]*"
-                   minlength="5"
-                   maxlength="50"
-                   name="fullName"/>
-        </div>
-        <div style="margin: 10px; height: 35px;">
-            Date of birth:
-            <input type="date" required="" id="dateOfBirth" name="date"/>
-        </div>
-        <div>
-            <input type="radio" name="sex" value="MALE"> Male
-            <input type="radio" name="sex" value="FEMALE"> Female
-            <input type="radio" name="sex" value="OTHER"> Other
-        </div>
-        <div>
-            <input type="text" placeholder="eMail" required="" id="email"
-                   pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" name="mail"/>
-        </div>
-        <div>
-            <input type="text" placeholder="Address" required="" id="address" minlength="2" maxlength="40" name="address"/>
-        </div>
-        <div>
-            <input type="text" required="" id="phone" pattern="[380][0-9]{11}" placeholder="example (380123456789)"
-                   name="phone"/>
-        </div>
-        <div>
-            <input type="text" placeholder="Username" required="" id="username" name="username"
-                   minlength="5" maxlength="100"/>
-        </div>
-        <div>
-            <input type="password" placeholder="Password"
-                   minlength="5" maxlength="100"
-                   required="" id="password" name="password"/>
-        </div>
-        <div>
-            <input type="submit" id="submitButton" value="Register" />
-            <a href="/login">Sing in</a>
-        </div>
-    </form>
-</section>
+    <section id="content">
+        <form action="/registration" method="post">
+            <h1>Registration Form</h1>
+            <div>
+                <input id="pd" maxlength="50" minlength="5" name="fullName" pattern="[a-zA-Z'-'\s]*"
+                       placeholder="Full name"
+                       required=""
+                       type="text"/>
+            </div>
+            <div style="margin: 10px; height: 35px;">
+                Date of birth:
+                <input id="dateOfBirth" name="date" required="" type="date"/>
+            </div>
+            <div>
+                <input name="sex" type="radio" value="MALE"> Male
+                <input name="sex" type="radio" value="FEMALE"> Female
+                <input name="sex" type="radio" value="OTHER"> Other
+            </div>
+            <div>
+                <input id="email" name="mail" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" placeholder="eMail"
+                       required="" type="text"/>
+            </div>
+            <div>
+                <input id="address" maxlength="40" minlength="2" name="address" placeholder="Address" required=""
+                       type="text"/>
+            </div>
+            <div>
+                <input id="phone" name="phone" pattern="[380][0-9]{11}" placeholder="example (380123456789)" required=""
+                       type="text"/>
+            </div>
+            <div>
+                <input id="username" maxlength="100" minlength="5" name="username" placeholder="Username"
+                       required="" type="text"/>
+            </div>
+            <div>
+                <input id="password" maxlength="100"
+                       minlength="5" name="password"
+                       placeholder="Password" required="" type="password"/>
+            </div>
+            <div>
+                <input id="submitButton" type="submit" value="Register"/>
+                <a href="/login">Sing in</a>
+            </div>
+        </form>
+    </section>
 </div>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script defer>

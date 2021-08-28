@@ -1,19 +1,15 @@
 package com.example.privateclinic.controllers.ui;
 
-import com.example.privateclinic.models.*;
+import com.example.privateclinic.models.Procedure;
 import com.example.privateclinic.service.procedures.impls.ProcedureServiceImpl;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
-
-import java.text.SimpleDateFormat;
-import java.util.Collections;
 
 /**
  * Created by IntelliJ IDEA.
@@ -73,8 +69,7 @@ public class ProceduresUIController
 			procedureService.create(procedure);
 
 			return "redirect:/ui/procedures/showAll";
-		}
-		catch (Exception e)
+		} catch (Exception e)
 		{
 			throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Something went " +
 					"wrong");
@@ -112,8 +107,7 @@ public class ProceduresUIController
 			procedureService.update(procedure);
 
 			return "redirect:/ui/procedures/showAll";
-		}
-		catch (Exception e)
+		} catch (Exception e)
 		{
 			throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Something went " +
 					"wrong");

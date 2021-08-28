@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title>Form</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" rel="stylesheet">
     <style>
         #form-container {
             margin: 30px auto;
@@ -28,101 +28,109 @@
         <p class="fw-bolder ">Doctor form:</p>
         <div class="input-group mb-3">
             <span class="input-group-text">Full name:</span>
-            <input type="text" th:value="${doctor.getPerson().getFullName()}" class="form-control"
-                   placeholder="Doctor`s full name" required name="fullName"
-                   pattern="[A-Za-zА0-9]+\s?+[A-Za-zА]" maxlength="100" min="2">
+            <input class="form-control" maxlength="100" min="2"
+                   name="fullName" pattern="[A-Za-zА0-9]+\s?+[A-Za-zА]" placeholder="Doctor`s full name"
+                   required th:value="${doctor.getPerson().getFullName()}" type="text">
         </div>
         <div class="input-group mb-3">
             <span class="input-group-text">Specialty:</span>
-            <input type="text" th:value="${doctor.getSpecialty()}" class="form-control"
-                   placeholder="Doctor`s specialty" required name="specialty"
-                   pattern="[A-Za-zА0-9]+\s?+[A-Za-zА]" maxlength="100" min="1">
+            <input class="form-control" maxlength="100" min="1"
+                   name="specialty" pattern="[A-Za-zА0-9]+\s?+[A-Za-zА]" placeholder="Doctor`s specialty"
+                   required th:value="${doctor.getSpecialty()}" type="text">
         </div>
         <div class="input-group mb-3">
             <span class="input-group-text">Getting Started:</span>
-            <input type="time" th:value="${#temporals.format(doctor.getStartHour(), 'HH:mm')}"
-                   id="inputStartTime"
-                   class="form-control" name="startTime" min="05:00" max="23:00" required>
+            <input class="form-control" id="inputStartTime"
+                   max="23:00"
+                   min="05:00" name="startTime" required th:value="${#temporals.format(doctor.getStartHour(), 'HH:mm')}"
+                   type="time">
             <span class="input-group-text">End of work:</span>
-            <input type="time" th:value="${#temporals.format(doctor.getEndHour(), 'HH:mm')}"
-                   id="inputEndTime"
-                   class="form-control" name="endTime" min="05:00" max="23:00" required>
+            <input class="form-control" id="inputEndTime"
+                   max="23:00"
+                   min="05:00" name="endTime" required th:value="${#temporals.format(doctor.getEndHour(), 'HH:mm')}"
+                   type="time">
         </div>
         <div class="input-group mb-3">
             <span class="input-group-text">Date of birth:</span>
-            <input type="date"
-                   th:value="${#dates.format(doctor.getPerson().getDateOfBirth(), 'yyyy-MM-dd')}"
-                   class="form-control" required name="date">
+            <input class="form-control"
+                   name="date"
+                   required th:value="${#dates.format(doctor.getPerson().getDateOfBirth(), 'yyyy-MM-dd')}" type="date">
         </div>
         <div class="input-group mb-3">
             <span class="input-group-text">Gender:</span>
             <div style="width: max-content; margin: auto;">
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" value="FEMALE" name="sex"
-                           th:checked="${#strings.equals(doctor.getPerson().getSex().toString(), 'FEMALE')}">
+                    <input class="form-check-input" name="sex"
+                           th:checked="${#strings.equals(doctor.getPerson().getSex().toString(), 'FEMALE')}"
+                           type="radio"
+                           value="FEMALE">
                     <label class="form-check-label">Female</label>
                 </div>
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" value="MALE" name="sex"
-                           th:checked="${#strings.equals(doctor.getPerson().getSex().toString(), 'MALE')}">
+                    <input class="form-check-input" name="sex"
+                           th:checked="${#strings.equals(doctor.getPerson().getSex().toString(), 'MALE')}" type="radio"
+                           value="MALE">
                     <label class="form-check-label">Male</label>
                 </div>
                 <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" value="OTHER" name="sex"
-                           th:checked="${#strings.equals(doctor.getPerson().getSex().toString(), 'OTHER')}">
+                    <input class="form-check-input" name="sex"
+                           th:checked="${#strings.equals(doctor.getPerson().getSex().toString(), 'OTHER')}" type="radio"
+                           value="OTHER">
                     <label class="form-check-label">Other</label>
                 </div>
             </div>
         </div>
         <div class="input-group mb-3">
             <span class="input-group-text">E-mail:</span>
-            <input type="text" id="email" th:value="${doctor.getPerson().getEmail()}"
-                   class="form-control" placeholder="example.email@gmail.com" required name="mail"
-                   pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
+            <input class="form-control" id="email" name="mail"
+                   pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" placeholder="example.email@gmail.com" required
+                   th:value="${doctor.getPerson().getEmail()}"
+                   type="text">
         </div>
         <div class="input-group mb-3">
             <span class="input-group-text">Address:</span>
-            <input type="text" th:value="${doctor.getPerson().getAddress()}" class="form-control"
-                   placeholder="Doctor`s address" required name="address"
-                   minlength="0" maxlength="100">
+            <input class="form-control" maxlength="100" minlength="0"
+                   name="address" placeholder="Doctor`s address" required
+                   th:value="${doctor.getPerson().getAddress()}" type="text">
         </div>
         <div class="input-group mb-3">
             <span class="input-group-text">Phone number:</span>
-            <input type="text" id="phoneInput" th:value="${doctor.getPerson().getTelephoneNumber()}"
-                   class="form-control" placeholder="example: 380537496709" required name="phone"
-                   pattern="[380][0-9]{11}">
+            <input class="form-control" id="phoneInput" name="phone"
+                   pattern="[380][0-9]{11}" placeholder="example: 380537496709" required
+                   th:value="${doctor.getPerson().getTelephoneNumber()}"
+                   type="text">
         </div>
         <div class="input-group mb-3">
             <span class="input-group-text">Username:</span>
-            <input type="text" id="usernameInput" th:value="${doctor.getUser().getUsername()}"
-                   class="form-control" placeholder="Account username" required name="username"
-                   minlength="5" maxlength="100">
+            <input class="form-control" id="usernameInput" maxlength="100"
+                   minlength="5" name="username" placeholder="Account username" required
+                   th:value="${doctor.getUser().getUsername()}" type="text">
         </div>
         <div class="input-group mb-3">
             <span class="input-group-text">Password:</span>
-            <input type="password" class="form-control" placeholder="Account password" required name="password"
-                   minlength="5" maxlength="100">
+            <input class="form-control" maxlength="100" minlength="5" name="password" placeholder="Account password"
+                   required type="password">
         </div>
-        <a style="text-decoration: none" href="/main">
-            <button type="button" class="btn btn-outline-secondary">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                     class="bi bi-chevron-double-left" viewBox="0 0 16 16">
-                    <path fill-rule="evenodd"
-                          d="M8.354 1.646a.5.5 0 0 1 0 .708L2.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/>
-                    <path fill-rule="evenodd"
-                          d="M12.354 1.646a.5.5 0 0 1 0 .708L6.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/>
+        <a href="/main" style="text-decoration: none">
+            <button class="btn btn-outline-secondary" type="button">
+                <svg class="bi bi-chevron-double-left" fill="currentColor" height="16" viewBox="0 0 16 16"
+                     width="16" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M8.354 1.646a.5.5 0 0 1 0 .708L2.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"
+                          fill-rule="evenodd"/>
+                    <path d="M12.354 1.646a.5.5 0 0 1 0 .708L6.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"
+                          fill-rule="evenodd"/>
                 </svg>
                 Back
             </button>
         </a>
-        <button type="submit" class="btn btn-outline-secondary">
+        <button class="btn btn-outline-secondary" type="submit">
             Submit
-            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="19" fill="currentColor"
-                 class="bi bi-chevron-double-right" viewBox="0 0 12 19">
-                <path fill-rule="evenodd"
-                      d="M3.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L9.293 8 3.646 2.354a.5.5 0 0 1 0-.708z"></path>
-                <path fill-rule="evenodd"
-                      d="M7.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L13.293 8 7.646 2.354a.5.5 0 0 1 0-.708z"></path>
+            <svg class="bi bi-chevron-double-right" fill="currentColor" height="19" viewBox="0 0 12 19"
+                 width="18" xmlns="http://www.w3.org/2000/svg">
+                <path d="M3.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L9.293 8 3.646 2.354a.5.5 0 0 1 0-.708z"
+                      fill-rule="evenodd"></path>
+                <path d="M7.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L13.293 8 7.646 2.354a.5.5 0 0 1 0-.708z"
+                      fill-rule="evenodd"></path>
             </svg>
         </button>
     </form>
